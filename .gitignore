@@ -1,0 +1,10 @@
+INSTALL.txt
+LICENSE.txt
+README.txt
+demos/
+library/*
+imagecache/*
+tmp/adminka_images/*
+.idea/*
+extras/documentation
+static/default/upload/*
