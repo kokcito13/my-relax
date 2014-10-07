@@ -1,0 +1,32 @@
+<? $this->headScript()->captureStart() ?>
+<? $this->headScript()->captureEnd() ?>
+<? $this->area = $this->salon->getArea(); ?>
+<?=$this->ShowUrlBack($this->salon);?>
+<div class="singleSalonBox">
+    <?=$this->ShowSalonHeader($this->salon);?>
+    <?=$this->ShowSalonMenu($this->salon, 'vidy-massage');?>
+    <div class="salonContent">
+        <div class="salonSidebar" style="background: url(<?=$this->salon->getPhoto4()->getPath('220:1140');?>) no-repeat center center;">
+        </div>
+        <div class="salonContentRight">
+            <article>
+                <h2><?=Kernel_Block::getText('Виды массажа и цены', $this->blocks);?></h2>
+                <table>
+                    <?php foreach($this->massages as $massage): ?>
+                        <?php $content = $massage->getContent()->getFields(); ?>
+                        <tr>
+                            <td>
+                                <strong><?=$content['name']->getFieldtext();?></strong> – <?=$content['content']->getFieldtext();?>.
+                            </td>
+                            <td><strong><?=$massage->getPrice();?> <? if (Kernel_City::findCityFromUrl()->getId() == 5 || Kernel_City::findCityFromUrl()->getId() == 6):?>руб<? else: ?>грн<? endif ?>.</strong></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </article>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="salonFooter" style="background: url(<?=$this->salon->getPhoto3()->getPath('940:150');?>) no-repeat center center;">
+    </div>
+    <?=$this->ShowSalonMenu($this->salon, 'vidy-massage');?>
+</div>

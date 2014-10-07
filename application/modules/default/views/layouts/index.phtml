@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <title><?php echo $this->title; ?></title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="description" content="<?= $this->description ?>"/>
+    <meta name="keywords" content="<?= $this->keywords ?>"/>
+
+    <meta name='yandex-verification' content='640b7b0663c2edc7' />
+    <?= $this->headText; ?>
+    <!--[if lte IE 8]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+
+
+    <script type="text/javascript" src="/static/default/js/jquery-1.9.1.min.js"></script>
+    <script>
+        var inProgress = false;
+        var page = 2;
+        var SITE_NAME = '<?=SITE_NAME?>';
+        var URL_SUBSCRIBE = '<?=$this->url(array(),'default-subscribe-add-ajax')?>';
+        var URL_PAGINATION = "<?=$this->url(array(), 'default-salons-get-ajax');?>";
+        var URL_SAVE_PHONE = "<?=$this->url(array(), 'default-phone-session');?>";
+        var CITY_ID = '<?=$this->currentCity?$this->currentCity->getId():0?>';
+        var AREA_ID = '<?=isset($this->area)?$this->area->getId():0?>';
+        var CURRENT_WORD = '<?=isset($this->word)?$this->word:''?>';
+        var TEXT_SELECT_CITY = '– <?=Kernel_Block::getText('Сначала выберите район', $this->blocks);?> –';
+        var TEXT_NEWS_SUBSCRIBE = '<p><?=Kernel_Block::getText('Спасибо Вы подписаны на новости!', $this->blocks);?></p>';
+        var TEXT_AFTER_PHONE = '<?=Kernel_Block::getText('скидка 5% за упоминание сайта viprelax', $this->blocks);?>';
+    </script>
+    <?=$this->siteSetings->getHead();?>
+</head>
+<body>
+    <?php echo $this->partial('blocks/header.phtml', array (
+                                                           'menu' => $this->menu,
+                                                           'blocks' => $this->blocks,
+                                                           'siteSetings' => $this->siteSetings,
+                                                           'cityContent' => $this->currentCityContent,
+                                                           'currentLang' => $this->currentLang,
+                                                           'area' => isset($this->area)?$this->area:false,
+                                                           'word' => isset($this->word)?$this->word:'',
+                                                     )) ?>
+    <section class="container">
+        <div class="wrapper">
+            <style>
+                article p{
+                    color: #fff!important;
+                }
+            </style>
+            <?php echo $this->layout()->content ?>
+        </div>
+    </section>
+    <?php echo $this->partial('blocks/footer.phtml', array (
+                                                           'blocks'      => $this->blocks,
+                                                           'siteSetings' => $this->siteSetings
+
+                                                     )) ?>
+    <link rel="stylesheet" type="text/css" href="/static/default/css/style.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/static/default/css/adaptive.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/static/default/css/fancybox.css" media="screen"/>
+    <script type="text/javascript" src="/static/default/js/script.js"></script>
+    <?=$this->headScript()?>
+    <script type="text/javascript" src="/static/default/js/more.js"></script>
+    <script src="/static/default/js/jquery.lazyload.min.js" type="text/javascript"></script>
+    <script>
+        $(function(){
+            changeCity($('#<?=$this->currentCity?$this->currentCity->getUrl():0?>'), false);
+            setCurrentCityAndArea();
+            $('body').on('click','.pagination a', function(){
+//                getAjaxMass($(this).data('page'))
+//                getAjaxPage($(this).data('page'))
+
+//                return false;
+            });
+            setTimeout(function(){
+                $("img.lazy").lazyload({
+                    effect : "fadeIn"
+                });
+            }, 500)
+        });
+    </script>
+    <?=$this->siteSetings->getBody();?>
+</body>
+</html>

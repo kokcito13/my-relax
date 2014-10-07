@@ -1,0 +1,41 @@
+<? $this->headScript()->captureStart() ?>
+<? $this->headScript()->captureEnd() ?>
+<? $this->area = $this->salon->getArea(); ?>
+<?=$this->ShowUrlBack($this->salon);?>
+<div class="singleSalonBox">
+    <?=$this->ShowSalonHeader($this->salon);?>
+    <?=$this->ShowSalonMenu($this->salon, 'girls');?>
+    <div class="salonContent">
+        <div class="salonSidebar" style="background: url(<?=$this->salon->getPhoto4()->getPath('220:1140');?>) no-repeat center center;">
+        </div>
+        <div class="salonContentRight">
+            <h3><?=Kernel_Block::getText('Девушки салона', $this->blocks);?></h3>
+            <? foreach ($this->girls as $k=>$girl): ?>
+                <? $content = $girl->getContent()->getFields();?>
+                <div class="singleSalonModelItem" id="girl_<?=$girl->getId()?>">
+                    <p><span><?=$content['contentName']->getFieldText();?></span>, <?=$girl->getAge();?> год</p>
+                    <div id="carousel-<?=$k+1?>" class="salonModelCarouselWrap">
+                        <? $photos = $girl->getGallery()->getPhotos(); ?>
+                        <? foreach  ($photos as $photo): ?>
+                            <img src="<?=$photo->getPath('500', true);?>" alt="Массажистка <?=$content['contentName']->getFieldText();?>">
+                        <? endforeach; ?>
+                    </div>
+                    <a id="prev-model-<?=$k+1?>" class="carouselNav prev" href="#"></a>
+                    <a id="next-model-<?=$k+1?>" class="carouselNav next" href="#"></a>
+                    <div class="loaderBox"></div>
+                </div>
+            <? endforeach; ?>
+        </div>
+        <div class="clear"></div>
+        <div class="descText" style="margin-top: 10px;">
+            <article>
+                <p></p>
+                <?=$this->contentPage['content']->getFieldText();?>
+                <p></p>
+            </article>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="salonFooter" style="background: url(<?=$this->salon->getPhoto3()->getPath('940:150');?>) no-repeat center center;"></div>
+    <?=$this->ShowSalonMenu($this->salon, 'girls');?>
+</div>

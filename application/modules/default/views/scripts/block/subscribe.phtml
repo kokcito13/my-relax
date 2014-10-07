@@ -1,0 +1,16 @@
+<div class="subscribeBox">
+    <div class="subscribeText">
+        <? if ($this->city): ?>
+            <p><?=Kernel_Block::getText('in', $this->blocks);?> <strong><?=$this->cityContent['contentName']->getFieldText();?></strong> <?=Kernel_Block::getText('email_box_top_category', $this->blocks);?></p>
+        <? else: ?>
+            <p><?=Kernel_Block::getText('email_box_top_main', $this->blocks);?></p>
+        <? endif; ?>
+        <p><em><?=Kernel_Block::getText('email_box_bottom', $this->blocks);?></em></p>
+    </div>
+    <form action="" onsubmit="return sendSubscribe(this);">
+        <input type="text" class="input_subscribe" name="s" size="10" value="<?=Kernel_Block::getText('Ваш E-mail', $this->blocks);?>" onblur="if (this.value == '') {this.value = '<?=Kernel_Block::getText('Ваш E-mail', $this->blocks);?>';}" onfocus="if (this.value == '<?=Kernel_Block::getText('Ваш E-mail', $this->blocks);?>') {this.value = '';}"/>
+        <input type="submit" value="<?=Kernel_Block::getText('want', $this->blocks);?>"/>
+        <div class="clear"></div>
+    </form>
+    <div class="clear"></div>
+</div>

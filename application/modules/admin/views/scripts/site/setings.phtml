@@ -1,0 +1,136 @@
+<?= $this->partial('blocks/menus/top.phtml'); ?>
+<? $this->headScript()->captureStart() ?>
+<? $this->headScript()->captureEnd() ?>
+<script src="/static/admin/js/fileuploader.js" type="text/javascript"></script>
+<link type="text/css" title="stylesheet" href="/static/admin/css/fileuploader.css" rel="stylesheet"/>
+<script>
+    function initUploaderWall(options,idPhoto){
+        
+        initComplete = function(id, fileName, responseJSON) {
+            var data = responseJSON;
+            
+            if (data.status == false) {
+               ShowPopUp('Can not upload image now');
+            } else {
+                $('#previewImage'+idPhoto).removeClass('hide').attr('href', decodeURIComponent((data.path + '').replace(/&amp;/g, '&')) + '&t=' + new Date().getTime());
+                $('#idPhoto'+idPhoto).val(data.idPhoto);
+            }
+        }
+
+        new qq.FileUploader({
+            element: document.getElementById(options.upload_button_id),
+            action: options.action, 
+            debug: true,
+            button_label: options.button_label,
+            onComplete: initComplete,
+            messages: options.messages,
+            showMessage: function(message) {
+                alert(message);
+            },
+            onProgress: function(id, fileName, loaded, total){
+                
+            }
+        }); 
+
+        return false;
+    }
+     $(document).ready(function(){
+        initUploaderWall({
+            'upload_button_id':'file_uploader1',
+            'action': '/admin/photo/upload/<?=$this->idPhoto1?>/u.html',
+            'button_label': 'Загрузить'
+        },1);
+         initUploaderWall({
+             'upload_button_id':'file_uploader2',
+             'action': '/admin/photo/upload/<?=$this->idPhoto2?>/u.html',
+             'button_label': 'Загрузить'
+         },2);
+    });
+</script>
+<?
+if( isset($this->photo1) )
+    $photoPath1 = trim($this->photo1->getPhotoPath());
+else 
+    $photoPath1 = '';
+if( isset($this->photo2) )
+    $photoPath2 = trim($this->photo2->getPhotoPath());
+else 
+    $photoPath2 = '';
+?>
+<form action="<?= $this->url() ?>" method="post" id="PageForm"> 
+    <table class="zebra edit">
+        <tr class="">
+            <td width="193" class="first">Banner1
+                <a href="<?if ($this->idPhoto1 === 0 || empty($photoPath1) ): ?>/static/admin/images/nobg.png<? else: echo Application_Model_Kernel_Photo::getById($this->idPhoto1)->getPath('210:130'); endif ?>" target="_blank" id="previewImage1" class="preview <? if ($this->idPhoto1 === 0 || empty($photoPath1) ): ?>hide<? endif ?>" title="">
+                    <img src="/static/admin/images/picture.png" alt="">
+                </a>
+            </td>
+            <td>
+                <div id="file_uploader1"></div>
+            </td>
+        </tr>
+        <tr class="grey">
+            <td width="193" class="first">URL1:</td>
+            <td><input name="url1" type="integer" class="field" value="<?php echo $this->info->getUrl1();?>" /></td>
+        </tr>
+        <tr class="">
+            <td width="193" class="first">Banner2
+                <a href="<?if ($this->idPhoto2 === 0 || empty($photoPath2) ): ?>/static/admin/images/nobg.png<? else: echo Application_Model_Kernel_Photo::getById($this->idPhoto2)->getPath('220:130'); endif ?>" target="_blank" id="previewImage2" class="preview <? if ($this->idPhoto2 === 0 || empty($photoPath2) ): ?>hide<? endif ?>" title="">
+                    <img src="/static/admin/images/picture.png" alt="">
+                </a>
+            </td>
+            <td>
+                <div id="file_uploader2"></div>
+            </td>
+        </tr>
+        <tr class="grey">
+            <td width="193" class="first">URL2:</td>
+            <td><input name="url2" type="text" class="field" value="<?php echo $this->info->getUrl2();?>"/></td>
+        </tr>
+        <tr class="">
+            <td width="193" class="first">Robots.txt:</td>
+            <td>
+                <textarea rows='10' cols='40' name="robots"><?php echo $this->info->getRobots();?></textarea>
+            </td>
+        </tr>
+        <tr class="grey">
+            <td width="193" class="first">Sitemap.xml:</td>
+            <td>
+                <textarea rows='10' cols='40' name="sitemap"><?php echo $this->info->getSitemap();?></textarea>
+            </td>
+        </tr>
+        <tr class="">
+            <td width="193" class="first">Head for analitics:</td>
+            <td>
+                <textarea rows='10' cols='40' name="head"><?php echo $this->info->getHead();?></textarea>
+            </td>
+        </tr>
+        <tr class="grey">
+            <td width="193" class="first">Body for metrics:</td>
+            <td>
+                <textarea rows='10' cols='40' name="body"><?php echo $this->info->getBody();?></textarea>
+            </td>
+        </tr>
+        <tr class="">
+            <td width="193" class="first">Ссылки масажа:</td>
+            <td>
+                <textarea rows='10' cols='40' name="mass_links"><?php echo $this->info->getMassLinks();?></textarea>
+            </td>
+        </tr>
+        <tr class="grey">
+            <td colspan="2">
+                <div class="m10 centerButton">
+                    <input id="idPhoto1" type="hidden" name="idPhoto1" value="<?=$this->idPhoto1;?>" />
+                    <input id="idPhoto2" type="hidden" name="idPhoto2" value="<?=$this->idPhoto2;?>" />
+                    <a href="javascript:SubmitPageFrom();" class="button_blue">Сохранить</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+<input id="uploadUrl" type="hidden" value="<?=$this->url(array(),'admin-photo-upload')?>"/>
+<div style="display: none;">
+<textarea name="textareas_ru_RU" id="textareas_ru_RU" ></textarea>
+<textarea name="textareas_ua_UA" id="textareas_ua_UA" style="display: none;"></textarea>
+<textarea name="textareas_en_EN" id="textareas_en_EN" style="display: none;"></textarea>
+</div>

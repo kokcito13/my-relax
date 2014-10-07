@@ -1,0 +1,46 @@
+<?=$this->partial('blocks/menus/top.phtml');?>
+<script>
+    function confirmDelete()
+    {
+        if (!confirm('Уверены что хотите удалить?')) {
+            return false;
+        }
+
+        return true;
+    }
+</script>
+<table class="zebra">
+    <thead> 
+        <tr> 
+            <td style="padding-left:10px;">
+            </td>
+            <td></td> 
+            <td></td>
+            <td></td> 
+            <td></td> 
+        </tr>
+    </thead>
+    <?php if (count($this->comments)): ?>
+    <?php $class = ''; ?>
+        <tbody>
+        <? $i = 0; ?>
+        <? foreach ($this->comments as $item):
+            $i++; ?>
+              <? ($class === 'grey') ? $class = '' : $class='grey'; ?>
+            <tr id="<?=$item->getIdComment()?>" <?php if($item->getCommentStatus() == Application_Model_Kernel_Comment::STATUS_CREATE):?>style="background-color: yellow;" class="<?php else: ?> class=" <?=$class; ?> <?php endif; ?> id_<?=$item->getIdComment()?>">
+                  <td style="padding-left:10px;">
+                      <a href="<?=$this->url(array('id' => $item->getIdComment(),'salon_id'=>$this->salon_id), 'admin-comment-edit');?>" class="show" title="Просмотреть">
+                        <?php echo $item->getCommentNick();?>
+                      </a>
+                  </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a href="<?=$this->url(array('id' => $item->getIdComment(),'salon_id'=>$this->salon_id), 'admin-comment-delete');?>" onclick="return confirmDelete();" class="delete" title="Удалить"><img src="/static/admin/images/icon_delete.gif" alt="" width="9" height="8" /></a>
+                    </td>
+              </tr>
+        <?php endforeach; ?>
+        </tbody>
+    <?php endif; ?>
+</table>
