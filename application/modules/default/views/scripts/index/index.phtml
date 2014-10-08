@@ -1,6 +1,6 @@
 <?php $this->headScript()->captureStart() ?>
 <? $this->headScript()->captureEnd() ?>
-<?=$this->ShowSubscribe();?>
+
 <? $city = Kernel_City::findCityFromUrl();?>
 <? if($this->salons->paginator->count() < 2): ?>
     <script>
@@ -27,10 +27,10 @@
 </div>
 <div class="clear"></div>
 <div id="more_shows" style="padding-left: 35%; height: 50px;">
-    <a href="#" onclick="return getAjaxPage();">Показать еще</a>
+    <a href="#" onclick="">Показать еще</a>
 </div>
 <div class="clear"></div>
-<?=$this->ShowSubscribe();?>
+
 <div class="descText">
     <article">
     <div class="map-wrap" id="map-wrap"></div>
@@ -41,72 +41,3 @@
         <?php echo $this->text ?>
     </article>
 </div>
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=ru"></script>
-<script>
-    var map;
-    var openedWindow = false;
-    function setMap()
-    {
-        var main = $('.salonItem').first();
-        var mapOptions = {
-            center: new google.maps.LatLng(main.data('lat'), main.data('lng')),
-            zoom:13,
-            mapTypeId:google.maps.MapTypeId.ROADMAP,
-            scrollwheel:false
-        };
-        var map = new google.maps.Map(document.getElementById("map-wrap"),
-            mapOptions)
-
-        $('.salonItem').each(function(index){
-
-            var name = $(this).find('h3').html();
-
-            var marker = new google.maps.Marker({
-                map:map,
-                position: new google.maps.LatLng($(this).data('lat'), $(this).data('lng'))
-            });
-
-            var infowindow = new google.maps.InfoWindow(
-                {
-                    content: '<div style="padding: 15px;">'+
-                        '<img src="'+$(this).data('img')+'" width="80" height="80">'+
-                        '<br/><b><a style="color:blue;" href="'+$(this).data('url')+'">'+name+'</a></b></div>'
-                });
-
-            google.maps.event.addListener(marker, 'click', function () {
-                if (openedWindow)
-                    openedWindow.close();
-                openedWindow = infowindow;
-                infowindow.open(map, marker);
-                map.setCenter(marker.getPosition());
-            });
-
-        });
-
-        return false;
-    }
-
-    $(document).ready(function(){
-        setMap();
-    });
-</script>
-<style>
-    #more_shows a {
-        display: block;
-        width: 35%;
-        padding-left: 0;
-        padding-right: 0;
-        color: #fff;
-        background-color: #b1120f;
-        border-color: #23a332;
-        margin-bottom: 0;
-        font-weight: 400;
-        text-align: center;
-        vertical-align: middle;
-        cursor: pointer;
-        white-space: nowrap;
-        font-size: 16px;
-        line-height: 1.7;
-        border-radius: 0;
-    }
-</style>

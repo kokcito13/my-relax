@@ -47,11 +47,6 @@
                                                      )) ?>
     <section class="container">
         <div class="wrapper">
-            <style>
-                article p{
-                    color: #fff!important;
-                }
-            </style>
             <?php echo $this->layout()->content ?>
         </div>
     </section>
@@ -62,28 +57,11 @@
                                                      )) ?>
     <link rel="stylesheet" type="text/css" href="/static/default/css/style.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="/static/default/css/adaptive.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="/static/default/css/fancybox.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/static/default/css/fotorama.css" media="screen"/>
     <script type="text/javascript" src="/static/default/js/script.js"></script>
     <?=$this->headScript()?>
     <script type="text/javascript" src="/static/default/js/more.js"></script>
     <script src="/static/default/js/jquery.lazyload.min.js" type="text/javascript"></script>
-    <script>
-        $(function(){
-            changeCity($('#<?=$this->currentCity?$this->currentCity->getUrl():0?>'), false);
-            setCurrentCityAndArea();
-            $('body').on('click','.pagination a', function(){
-//                getAjaxMass($(this).data('page'))
-//                getAjaxPage($(this).data('page'))
-
-//                return false;
-            });
-            setTimeout(function(){
-                $("img.lazy").lazyload({
-                    effect : "fadeIn"
-                });
-            }, 500)
-        });
-    </script>
     <?=$this->siteSetings->getBody();?>
 </body>
 </html>
