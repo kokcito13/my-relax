@@ -1,6 +1,6 @@
 <?php 
 
-define('SITE_NAME','rel.l');
+define('SITE_NAME','my-rel.lc');
 
 // Указание пути к директории приложения
 define('PUBLIC_PATH',realpath(dirname(__FILE__)));
