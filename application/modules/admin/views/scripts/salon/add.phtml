@@ -251,6 +251,10 @@ else
                         <td width="193" class="first">Адресс:</td>
                         <td><input name="content[<?=$lang->getId()?>][adress]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['adress'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['adress']) : ''?>" /></td>
                     </tr>
+                    <tr class="">
+                        <td width="193" class="first">URL:</td>
+                        <td><input name="content[<?=$lang->getId()?>][url]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['url'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['url']) : ''?>" /></td>
+                    </tr>
 				</table>
 			</div> 
 		<?php endforeach ?>

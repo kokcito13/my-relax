@@ -1,25 +1,24 @@
 <?php
+
 class Kernel_City
 {
     public function __construct()
     {
-
     }
 
     public static function findCityFromUrl()
     {
         $city = false;
         $serverName = $_SERVER['SERVER_NAME'];
-        $uri = substr($serverName, 0, -strlen(SITE_NAME) );
 
         $ar = explode('.', $serverName);
         if ($ar[0] === "www") {
             header('HTTP/1.1 301 Moved Permanently');
-            header('Location: http://'.substr($_SERVER['SERVER_NAME'], 4));
+            header('Location: http://' . substr($_SERVER['SERVER_NAME'], 4));
         }
 
-        if (!empty($uri)) {
-            $city = Application_Model_Kernel_City::getByUrl( substr($uri, 0, -1) );
+        if (!empty($serverName)) {
+            $city = Application_Model_Kernel_City::getByUrl($serverName);
         }
 
         return $city;
@@ -27,12 +26,11 @@ class Kernel_City
 
     public static function getUrlForLink($city)
     {
-        $cityUrl = 'http://'.SITE_NAME;
+        $cityUrl = 'http://' . SITE_NAME;
         if ($city) {
-            $cityUrl = 'http://'.$city->getUrl().'.'.SITE_NAME;
+            $cityUrl = 'http://' . $city->getUrl();
         }
 
         return $cityUrl;
     }
-
 }

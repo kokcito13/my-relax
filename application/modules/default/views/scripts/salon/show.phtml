@@ -1,41 +1,100 @@
-<? $this->headScript()->captureStart() ?>
-<? $this->headScript()->captureEnd() ?>
-<? $this->area = $this->salon->getArea(); ?>
-<?=$this->ShowUrlBack($this->salon);?>
-<div class="singleSalonBox">
-    <?=$this->ShowSalonHeader($this->salon);?>
-    <?=$this->ShowSalonMenu($this->salon, 'girls');?>
-    <div class="salonContent">
-        <div class="salonSidebar" style="background: url(<?=$this->salon->getPhoto4()->getPath('220:1140');?>) no-repeat center center;">
-        </div>
-        <div class="salonContentRight">
-            <h3><?=Kernel_Block::getText('Девушки салона', $this->blocks);?></h3>
-            <? foreach ($this->girls as $k=>$girl): ?>
-                <? $content = $girl->getContent()->getFields();?>
-                <div class="singleSalonModelItem" id="girl_<?=$girl->getId()?>">
-                    <p><span><?=$content['contentName']->getFieldText();?></span>, <?=$girl->getAge();?> год</p>
-                    <div id="carousel-<?=$k+1?>" class="salonModelCarouselWrap">
-                        <? $photos = $girl->getGallery()->getPhotos(); ?>
-                        <? foreach  ($photos as $photo): ?>
-                            <img src="<?=$photo->getPath('500', true);?>" alt="Массажистка <?=$content['contentName']->getFieldText();?>">
-                        <? endforeach; ?>
-                    </div>
-                    <a id="prev-model-<?=$k+1?>" class="carouselNav prev" href="#"></a>
-                    <a id="next-model-<?=$k+1?>" class="carouselNav next" href="#"></a>
-                    <div class="loaderBox"></div>
+<?// $this->headScript()->captureStart() ?>
+<?// $this->headScript()->captureEnd() ?>
+<?// $this->area = $this->salon->getArea(); ?>
+<?//=$this->ShowUrlBack($this->salon);?>
+<!--<div class="singleSalonBox">-->
+
+<!--    --><?//=$this->ShowSalonMenu($this->salon, 'girls');?>
+<!--    <div class="salonContent">-->
+<!--        <div class="salonSidebar" style="background: url(--><?//=$this->salon->getPhoto4()->getPath('220:1140');?><!--) no-repeat center center;">-->
+<!--        </div>-->
+<!--        <div class="salonContentRight">-->
+<!--            <h3></h3>-->
+
+<!--        </div>-->
+<!--        <div class="clear"></div>-->
+<!--        <div class="descText" style="margin-top: 10px;">-->
+<!--            <article>-->
+<!--                <p></p>-->
+<!--                --><?//=$this->contentPage['content']->getFieldText();?>
+<!--                <p></p>-->
+<!--            </article>-->
+<!--        </div>-->
+<!--        <div class="clear"></div>-->
+<!--    </div>-->
+<!--    <div class="salonFooter" style="background: url(--><?//=$this->salon->getPhoto3()->getPath('940:150');?><!--) no-repeat center center;"></div>-->
+<!--    --><?//=$this->ShowSalonMenu($this->salon, 'girls');?>
+<!--</div>-->
+<sections class="salon-content">
+    <div class="wrapper">
+        <div class="content-left">
+            <?=$this->ShowUrlBack($this->salon);?>
+            <?=$this->ShowSalonHeader($this->salon);?>
+            <? if (isset($this->contentPage['url']) && !empty($this->contentPage['url'])): ?>
+                <div class="more-info">
+                    <span class="white-lable">Узнать больше о наслаждении, </span></br>
+                    <span class="red-lable">которое получите в салоне</span>
+                    <a href="<?=$this->contentPage['url']->getFieldText();?>" target="_blank"><?=$this->contentPage['url']->getFieldText();?></a>
                 </div>
-            <? endforeach; ?>
+            <? endif; ?>
+            <div class="relax-recommends">
+                <div class="header"><?=Kernel_Block::getText('Девушки салона', $this->blocks);?></div>
+                <div class="model-item-container">
+                    <? foreach ($this->girls as $k=>$girl): ?>
+                        <? $content = $girl->getContent()->getFields();?>
+                        <div class="model-item-box">
+                            <div class="model-item">
+                                <div class="name">
+                                    <a href="#"><?=$content['contentName']->getFieldText();?></a>, <?=$girl->getAge();?>
+                                </div>
+                                <a href="#">
+                                    <? $photo = $girl->getGallery()->getFirstPhoto(); ?>
+                                    <img src="<?=$photo->getPath('150', true);?>" width="150px" alt="Массажистка <?=$content['contentName']->getFieldText();?>">
+                                </a>
+                                <a class="comment-value">26 отзывов</a>
+                            </div>
+                        </div>
+                    <? endforeach; ?>
+                </div>
+            </div>
+            <?//=$this->ShowSalonSubscribeBox()?>
+            <?//=$this->ShowTopSalonCity()?>
+            <?//=$this->ShowTopGirlCity()?>
         </div>
-        <div class="clear"></div>
-        <div class="descText" style="margin-top: 10px;">
-            <article>
-                <p></p>
-                <?=$this->contentPage['content']->getFieldText();?>
-                <p></p>
-            </article>
+        <aside class="sidebar-right">
+        <div class="sidebar-right-widget">
+            <h3>Отзывы о салоне <span>(36)</span></h3>
+            <a class="leave-comment" href="#">Оставить отзыв</a>
+            <ul>
+                <li>
+                    <span class="author">Миша</span>
+                    <time>19 мая 2013 в 01:50</time>
+                    <p class="author-comment">— Был сегодня в Вашем салоне. Мне очень понравилась массажистка Влада. Заеду
+                        еще. Ты мастер своего дела.</p>
+                </li>
+                <li>
+                    <span class="author">Миша</span>
+                    <time>19 мая 2013 в 01:50</time>
+                    <p class="author-comment">— Настя ты просто ангел!!! У тебя прекрасное тело а грудь мм....
+                        Ты профессионал! Рекомендую всем!!!!</p>
+                </li>
+                <li>
+                    <span class="author">Миша</span>
+                    <time>19 мая 2013 в 01:50</time>
+                    <p class="author-comment">— Дорогие мужчины!Спасибо за прекрасные слова в наш адрес.Мы всегда рады Вас
+                        видеть.Хотим ответить на ваши отзывы:-Лиза вернулась.А на счет затасканых..тупых..и
+                        антисанитарии-могу ответить-это ложь.Достаточно зайти на наш сайт и посмотреть на фото где шикарные
+                        девченки в аппартаментах с евроремонтом.Да и встречаем мы всех с улыбкой-так заведено.И уходит от
+                        нас ни с чем -один из пятидесяти.А то и отправляем сами если пришел "невминяшка"...А у нашего гостя
+                        видимо денег не хватило и ему отказали, вот и расстроился бедолага и решил грязью облить.Но это его
+                        мнение и мы его уважаем.А Вам советуем самим убедиться.Приходите,всегда Вам рады.</p>
+                </li>
+            </ul>
+            <div class="prev-next-comments-box">
+                <a class="prev-comments" href="#">&larr; Предыдущие</a>
+                <a class="next-comments" href="#">Следующие &rarr;</a>
+            </div>
         </div>
-        <div class="clear"></div>
+    </aside>
     </div>
-    <div class="salonFooter" style="background: url(<?=$this->salon->getPhoto3()->getPath('940:150');?>) no-repeat center center;"></div>
-    <?=$this->ShowSalonMenu($this->salon, 'girls');?>
-</div>
+</sections>
