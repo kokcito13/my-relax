@@ -1,632 +1,305 @@
 <?php $this->headScript()->captureStart() ?>
 <? $this->headScript()->captureEnd() ?>
+<? $city = Kernel_City::findCityFromUrl();?>
 <sections class="home-content">
-<div class="wrapper">
-<aside class="left-sidebar">
-    <div class="sidebar-widget salons">
-        <h3>Салоны</h3>
-        <ul>
-            <li><a href="#">Киев</a>
-                <ul class="sub-menu">
-                    <li><a href="#">Дарницкий</a></li>
-                    <li><a href="#">Подольский</a></li>
-                    <li><a href="#">Печерский</a></li>
-                    <li><a href="#">Шевченковский</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Днепропетровск</a>
-                <ul class="sub-menu">
-                    <li><a href="#">Дарницкий</a></li>
-                    <li><a href="#">Подольский</a></li>
-                    <li><a href="#">Печерский</a></li>
-                    <li><a href="#">Шевченковский</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Одесса</a>
-                <ul class="sub-menu">
-                    <li><a href="#">Дарницкий</a></li>
-                    <li><a href="#">Подольский</a></li>
-                    <li><a href="#">Печерский</a></li>
-                    <li><a href="#">Шевченковский</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Донецк</a>
-                <ul class="sub-menu">
-                    <li><a href="#">Дарницкий</a></li>
-                    <li><a href="#">Подольский</a></li>
-                    <li><a href="#">Печерский</a></li>
-                    <li><a href="#">Шевченковский</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Харьков</a>
-                <ul class="sub-menu">
-                    <li><a href="#">Дарницкий</a></li>
-                    <li><a href="#">Подольский</a></li>
-                    <li><a href="#">Печерский</a></li>
-                    <li><a href="#">Шевченковский</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Винница</a>
-                <ul class="sub-menu">
-                    <li><a href="#">Дарницкий</a></li>
-                    <li><a href="#">Подольский</a></li>
-                    <li><a href="#">Печерский</a></li>
-                    <li><a href="#">Шевченковский</a></li>
-                </ul>
-            </li>
-        </ul>
-        <div class="all-salons-link-box">
-            <a class="all-salons" href="#">Весь список салонов &rarr;</a>
-        </div>
+<? if (!$city): ?>
+    <div class="wrapper">
+        <aside class="left-sidebar">
+            <?=$this->ShowWidgetSalons();?>
+            <?=$this->ShowWidgetBanner();?>
+            <?=$this->ShowWidgetComments();?>
+            <?=$this->ShowWidgetAdvertisings();?>
+            <?=$this->ShowWidgetArticles();?>
+        </aside>
+        <div class="content-right">
+    <article>
+        <h2>Весь эротический массаж в Украине</h2>
 
-    </div>
-    <div class="sidebar-widget adv">
-        <h3></h3>
-        <a href="#"><img src="/static/default/images/banner-sb.png"></a>
-    </div>
-    <div class="sidebar-widget comments-widget">
-        <h3>Отзывы</h3>
-        <ul>
-            <li>
-                <a href="#"><img src="/static/default/images/ava.png"></a>
-                <a class="author" href="#">Mon - Amour</a>
-                <time>19 мая 2013 в 01:50</time>
-                <a class="comment" href="#">— Я покупала сертификат для своего мужчины. Большое спасибо, девушкам Даше и Асе.</a>
-                <div class="clear"></div>
-            </li>
-            <li>
-                <a href="#"><img src="/static/default/images/ava.png"></a>
-                <a class="author" href="#">Mon - Amour</a>
-                <time>19 мая 2013 в 01:50</time>
-                <a class="comment" href="#">— Я покупала сертификат для своего мужчины. Большое спасибо, девушкам Даше и Асе.</a>
-                <div class="clear"></div>
-            </li>
-            <li>
-                <a href="#"><img src="/static/default/images/ava.png"></a>
-                <a class="author" href="#">Mon - Amour</a>
-                <time>19 мая 2013 в 01:50</time>
-                <a class="comment" href="#">— Я покупала сертификат для своего мужчины. Большое спасибо, девушкам Даше и Асе.</a>
-                <div class="clear"></div>
-            </li>
-        </ul>
-        <div class="all-link-right">
-            <a href="#" class="all-comments">Все отзывы &rarr;</a>
-        </div>
-
-    </div>
-
-    <div class="sidebar-widget">
-        <h3>Акции</h3>
-        <ul>
-            <li>
-                <time>19 мая 2013 в 01:50</time>
-                <a href="#">Достойный массажный салон должен быть достойным во всем</a>
-                <div class="clear"></div>
-            </li>
-            <li>
-                <time>19 мая 2013 в 01:50</time>
-                <a href="#">Интимный массаж не только возбуждает</a>
-                <div class="clear"></div>
-            </li>
-            <li>
-                <time>19 мая 2013 в 01:50</time>
-                <a href="#">Тайский массаж - не всегда эротический</a>
-                <div class="clear"></div>
-            </li>
-        </ul>
-        <div class="all-link-right">
-            <a href="#" class="all-link">Все акции &rarr;</a>
-        </div>
-
-    </div>
-
-    <div class="sidebar-widget">
-        <h3>Статьи</h3>
-        <ul>
-            <li>
-                <time>19 мая 2013 в 01:50</time>
-                <a href="#">Достойный массажный салон должен быть достойным во всем</a>
-                <div class="clear"></div>
-            </li>
-            <li>
-                <time>22 мая 2013 в 12:50</time>
-                <a href="#">Интимный массаж не только возбуждает</a>
-                <div class="clear"></div>
-            </li>
-            <li>
-                <time>07 мая 2013 в 11:50</time>
-                <a href="#">Тайский массаж - не всегда эротический</a>
-                <div class="clear"></div>
-            </li>
-        </ul>
-        <div class="all-link-right">
-            <a href="#" class="all-link">Все статьи &rarr;</a>
-        </div>
-
-    </div>
-</aside>
-<div class="content-right">
-<article>
-    <h2>Весь эротический массаж в Украине</h2>
-    <p>Сайт <a href="#">My-Relax</a> самый полный каталог салонов эротического массажа в Киеве и Украине. Для каждого салона Вы найдете: краткое описание, географическое месторасположение на карте города, фотографии девушек, отзывы и рейтинги от посетителей салонов, виды эротического массажа и его стоимость.</p>
-</article>
-<div class="warning">
-    <span class="warning-1">Cалоны, размещенные в каталоге My-Relax,</span>
-    <span class="warning-2">не предоставляют</span>
-    <span class="warning-3">услуг интимного характера !!!</span>
-</div>
-<div class="relax-recommends">
-    <div class="header">
-        My-Relax рекомендует: <small>лучшие салоны эротического массажа</small>
-    </div>
-    <div id="salon-carousel" class="content">
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">5 комнат</a>
-                <a href="#"><img src="/static/default/images/salon-item.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="salon-item">
-                <a href="#">5 комнат</a>
-                <a href="#"><img src="/static/default/images/salon-item.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">Milos</a>
-                <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="salon-item">
-                <a href="#">Milos</a>
-                <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">5 комнат</a>
-                <a href="#"><img src="/static/default/images/salon-item.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="salon-item">
-                <a href="#">5 комнат</a>
-                <a href="#"><img src="/static/default/images/salon-item.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">5 комнат</a>
-                <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="salon-item">
-                <a href="#">5 комнат</a>
-                <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">Amur</a>
-                <a href="#"><img src="/static/default/images/salon-item.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="salon-item">
-                <a href="#">Amur</a>
-                <a href="#"><img src="/static/default/images/salon-item.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">Milos</a>
-                <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="salon-item">
-                <a href="#">Milos</a>
-                <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">5 комнат</a>
-                <a href="#"><img src="/static/default/images/salon-item.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="salon-item">
-                <a href="#">5 комнат</a>
-                <a href="#"><img src="/static/default/images/salon-item.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">Amur</a>
-                <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="salon-item">
-                <a href="#">Amur</a>
-                <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-    </div>
-    <a id="salon-prev" href="#"></a>
-    <a id="salon-next" href="#"></a>
-    <a class="all-item-carousel" href="#">Все салоны &rarr;</a>
-</div>
-<div class="top-models">
-    <div class="header">
-        ТОП девушки <small>салонов эротического массажа</small>
-    </div>
-    <div id="model-carousel" class="content">
-        <div class="model-item-box">
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model1g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model1g.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="model-item-box">
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="model-item-box">
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="model-item-box">
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model1g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model1g.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="model-item-box">
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="model-item-box">
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-    </div>
-    <a id="model-prev" href="#"></a>
-    <a id="model-next" href="#"></a>
-    <a class="all-item-carousel" href="#">Все девушки &rarr;</a>
-</div>
-<div class="subscribe-box">
-    <div class="left-cell">
-        <span class="subs-white">Подпишись на нашу рассылку</span>
-        <span class="subs-red">и всегда будь в курсе:</span>
-        <ul>
-            <li>новых девушек на портале</li>
-            <li>новых салонов в нашем каталоге</li>
-            <li>новых возможностях наслаждения</li>
-        </ul>
-    </div>
-    <div class="right-cell">
-        <form>
-            <span>Ваша электронная почта</span>
-            <input type="text" name="" id=""/>
-            <input type="submit" name="" id="" value="Подписаться" />
-        </form>
-    </div>
-</div>
-<div class="new-models">
-    <div class="header">
-        Новые девушки
-    </div>
-    <div id="new-model-carousel" class="content">
-        <div class="new-model-item-box">
-            <div class="new-model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model1g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="new-model-item-box">
-            <div class="new-model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="new-model-item-box">
-            <div class="new-model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="new-model-item-box">
-            <div class="new-model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model1g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="new-model-item-box">
-            <div class="new-model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="new-model-item-box">
-            <div class="new-model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-    </div>
-    <a id="new-model-prev" href="#"></a>
-    <a id="new-model-next" href="#"></a>
-    <a class="all-item-carousel" href="#">Все девушки &rarr;</a>
-</div>
-<div class="new-salon">
-    <div class="header">
-        Новые салоны
-    </div>
-    <div id="new-salon-carousel" class="content">
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">5 комнат</a>
-                <a href="#"><img src="/static/default/images/salon-item.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">Milos</a>
-                <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">5 комнат</a>
-                <a href="#"><img src="/static/default/images/salon-item.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">5 комнат</a>
-                <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">Amur</a>
-                <a href="#"><img src="/static/default/images/salon-item.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">Milos</a>
-                <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">5 комнат</a>
-                <a href="#"><img src="/static/default/images/salon-item.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="salon-item-box">
-            <div class="salon-item">
-                <a href="#">Amur</a>
-                <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-    </div>
-    <a id="new-salon-prev" href="#"></a>
-    <a id="new-salon-next" href="#"></a>
-    <a class="all-item-carousel" href="#">Все салоны &rarr;</a>
-</div>
-
-
-<article>
-    <h2>Для владельцев салонов эротического массажа</h2>
-    <p>Если Вы владелец салона эротического массажа и не нашли его на сайте E-Relax воспользуйтесь ссылкой Добавить салон.</p>
-    <p>Если Ваш салон уже добавлен, запросите у администратора пароли для доступа к странице для редактирования данных.</p>
-    <p>Каталог  my-relax.net - самый полный каталог действующих салонов эротического массажа в Украине. </p>
-    <p>На сегодняшний день посещение салона эротического массажа - это достаточно популярный способ отдыха и развлечений. Благодаря своей популярности среди жителей Украины и всего мира, эротический массаж представлен  в самых разнообразных формах.</p>
-</article>
-
-<div class="home-post-box">
-    <h2>Виды и элементы эротического массажа</h2>
-    <article class="home-post">
-        <h3><a href="#">Тайский массаж - не всегда эротический</a></h3>
-        <p>Начинается этот вид массажа с стимуляции стоп, путем надавливания на определенные точки. Тем самым производитнекоторые изменения в работе головного мозга клиента. Мозг начинает работать медленнее. Иными словами человек расслабляется</p>
-        <a class="read-more" href="#">Подробнее &rarr;</a>
+        <p>Сайт <a href="#">My-Relax</a> самый полный каталог салонов эротического массажа в Киеве и Украине. Для каждого
+            салона Вы найдете: краткое описание, географическое месторасположение на карте города, фотографии девушек,
+            отзывы и рейтинги от посетителей салонов, виды эротического массажа и его стоимость.</p>
     </article>
-    <article class="home-post">
-        <h3><a href="#">Отличия эротического массажа от класического</a></h3>
-        <p>Эротический массаж отличается от классического полной расслабленностью и интимностью. Обнаженные красивые массажистки, ласки с помощью тела и волос, массаж интимных мест доставят несказанное удовольствие. Массаж может быть выполнен множеством экзотических способов</p>
-        <a class="read-more" href="#">Подробнее &rarr;</a>
+    <div class="warning">
+        <span class="warning-1">Cалоны, размещенные в каталоге My-Relax,</span>
+        <span class="warning-2">не предоставляют</span>
+        <span class="warning-3">услуг интимного характера !!!</span>
+    </div>
+    <div class="relax-recommends">
+        <div class="header">
+            My-Relax рекомендует:
+            <small>лучшие салоны эротического массажа</small>
+        </div>
+        <div id="salon-carousel" class="content">
+            <div class="salon-item-box">
+                <div class="salon-item">
+                    <a href="#">5 комнат</a>
+                    <a href="#"><img src="/static/default/images/salon-item.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="salon-item">
+                    <a href="#">5 комнат</a>
+                    <a href="#"><img src="/static/default/images/salon-item.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+            <div class="salon-item-box">
+                <div class="salon-item">
+                    <a href="#">Milos</a>
+                    <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="salon-item">
+                    <a href="#">Milos</a>
+                    <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+            <div class="salon-item-box">
+                <div class="salon-item">
+                    <a href="#">5 комнат</a>
+                    <a href="#"><img src="/static/default/images/salon-item.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="salon-item">
+                    <a href="#">5 комнат</a>
+                    <a href="#"><img src="/static/default/images/salon-item.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+            <div class="salon-item-box">
+                <div class="salon-item">
+                    <a href="#">5 комнат</a>
+                    <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="salon-item">
+                    <a href="#">5 комнат</a>
+                    <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+            <div class="salon-item-box">
+                <div class="salon-item">
+                    <a href="#">Amur</a>
+                    <a href="#"><img src="/static/default/images/salon-item.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="salon-item">
+                    <a href="#">Amur</a>
+                    <a href="#"><img src="/static/default/images/salon-item.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+            <div class="salon-item-box">
+                <div class="salon-item">
+                    <a href="#">Milos</a>
+                    <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="salon-item">
+                    <a href="#">Milos</a>
+                    <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+            <div class="salon-item-box">
+                <div class="salon-item">
+                    <a href="#">5 комнат</a>
+                    <a href="#"><img src="/static/default/images/salon-item.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="salon-item">
+                    <a href="#">5 комнат</a>
+                    <a href="#"><img src="/static/default/images/salon-item.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+            <div class="salon-item-box">
+                <div class="salon-item">
+                    <a href="#">Amur</a>
+                    <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="salon-item">
+                    <a href="#">Amur</a>
+                    <a href="#"><img src="/static/default/images/salon-item-2.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+        </div>
+        <a id="salon-prev" href="#"></a>
+        <a id="salon-next" href="#"></a>
+        <a class="all-item-carousel" href="/">Все салоны &rarr;</a>
+    </div>
+    <div class="top-models">
+        <div class="header">
+            ТОП девушки
+            <small>салонов эротического массажа</small>
+        </div>
+        <div id="model-carousel" class="content">
+            <div class="model-item-box">
+                <div class="model-item">
+                    <div class="name">
+                        <a href="#">Виктория</a>, 22
+                    </div>
+                    <a href="#"><img src="/static/default/images/model1g.png"></a>
+                    <span class="city">Днепропетровск</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="model-item">
+                    <div class="name">
+                        <a href="#">Виктория</a>, 22
+                    </div>
+                    <a href="#"><img src="/static/default/images/model1g.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+            <div class="model-item-box">
+                <div class="model-item">
+                    <div class="name">
+                        <a href="#">Виктория</a>, 22
+                    </div>
+                    <a href="#"><img src="/static/default/images/model2g.png"></a>
+                    <span class="city">Днепропетровск</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="model-item">
+                    <div class="name">
+                        <a href="#">Виктория</a>, 22
+                    </div>
+                    <a href="#"><img src="/static/default/images/model2g.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+            <div class="model-item-box">
+                <div class="model-item">
+                    <div class="name">
+                        <a href="#">Виктория</a>, 22
+                    </div>
+                    <a href="#"><img src="/static/default/images/model2g.png"></a>
+                    <span class="city">Днепропетровск</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="model-item">
+                    <div class="name">
+                        <a href="#">Виктория</a>, 22
+                    </div>
+                    <a href="#"><img src="/static/default/images/model2g.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+            <div class="model-item-box">
+                <div class="model-item">
+                    <div class="name">
+                        <a href="#">Виктория</a>, 22
+                    </div>
+                    <a href="#"><img src="/static/default/images/model1g.png"></a>
+                    <span class="city">Днепропетровск</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="model-item">
+                    <div class="name">
+                        <a href="#">Виктория</a>, 22
+                    </div>
+                    <a href="#"><img src="/static/default/images/model1g.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+            <div class="model-item-box">
+                <div class="model-item">
+                    <div class="name">
+                        <a href="#">Виктория</a>, 22
+                    </div>
+                    <a href="#"><img src="/static/default/images/model2g.png"></a>
+                    <span class="city">Днепропетровск</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="model-item">
+                    <div class="name">
+                        <a href="#">Виктория</a>, 22
+                    </div>
+                    <a href="#"><img src="/static/default/images/model2g.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+            <div class="model-item-box">
+                <div class="model-item">
+                    <div class="name">
+                        <a href="#">Виктория</a>, 22
+                    </div>
+                    <a href="#"><img src="/static/default/images/model2g.png"></a>
+                    <span class="city">Днепропетровск</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+                <div class="model-item">
+                    <div class="name">
+                        <a href="#">Виктория</a>, 22
+                    </div>
+                    <a href="#"><img src="/static/default/images/model2g.png"></a>
+                    <span class="city">Киев</span>
+                    <a class="comment-value">26 отзывов</a>
+                </div>
+            </div>
+        </div>
+        <a id="model-prev" href="#"></a>
+        <a id="model-next" href="#"></a>
+        <a class="all-item-carousel" href="#">Все девушки &rarr;</a>
+    </div>
+    <?=$this->ShowSalonSubscribeBox()?>
+    <?=$this->ShowNewGirls()?>
+    <?=$this->ShowNewSalons()?>
+    <article>
+        <?php echo $this->text ?>
     </article>
-    <article class="home-post">
-        <h3><a href="#">Техника эромассажа</a></h3>
-        <p>Секреты эротического массажа могут вызвать заинтересованность в сексе даже у самого равнодушного к любовным играм человека</p>
-        <a class="read-more" href="#">Подробнее &rarr;</a>
-    </article>
-</div>
-</div>
-</div>
+    <?=$this->ShowNewMassages()?>
+    </div>
+    </div>
+<? else: ?>
+    <? $cityConten = $city->getContent()->getFields();?>
+    <div class="wrapper">
+        <aside class="left-sidebar">
+            <?=$this->ShowWidgetSalons();?>
+            <?=$this->ShowWidgetSubscribe();?>
+            <?=$this->ShowWidgetBanner();?>
+            <?=$this->ShowWidgetComments();?>
+            <?=$this->ShowWidgetNewSalons();?>
+        </aside>
+        <div class="content-right">
+            <article>
+                <h2>Весь эротический массаж в Украине</h2>
+                <p>Сайт <a href="#">My-Relax</a> самый полный каталог салонов эротического массажа в Киеве и Украине. Для каждого салона Вы найдете: краткое описание, географическое месторасположение на карте города, фотографии девушек, отзывы и рейтинги от посетителей салонов, виды эротического массажа и его стоимость.</p>
+            </article>
+            <?php echo $this->partial('block/list.phtml', array (
+                'salons' => $this->salons,
+                'siteSetings' => $this->siteSetings
+            )) ?>
+            <div class="descText">
+                <article>
+                    <?=$this->text;?>
+                </article>
+            </div>
+        </div>
+    </div>
+<? endif ?>
 </sections>
-
-<!---->
-<?// $city = Kernel_City::findCityFromUrl();?>
-<?// if($this->salons->paginator->count() < 2): ?>
-<!--    <script>-->
-<!--        page = 0;-->
-<!--    </script>-->
-<?// endif; ?>
-<?// if ($city): ?>
-<!--    --><?// $cityConten = $city->getContent()->getFields();?>
-<!--    <div class="breadcrumbs">-->
-<!--        <span>-->
-<!--            <a href="http://--><?// echo SITE_NAME ?><!--">--><?//=Kernel_Block::getText('Салоны эротического массажа', $this->blocks);?><!--</a>-->
-<!--        </span>-->
-<!--        <span>-->
-<!--            <span>--><?//=$cityConten['contentName']->getFieldText();?><!--</span>-->
-<!--        </span>-->
-<!--    </div>-->
-<?// endif; ?>
-<!--<div id="list_block">-->
-<!--    --><?php //echo $this->partial('block/list.phtml', array (
-//                                                        'salons' => $this->salons,
-//                                                        'siteSetings' => $this->siteSetings,
-//                                                        'blocks' => $this->blocks
-//                                                  )) ?>
-<!--</div>-->
-<!--<div class="clear"></div>-->
-<!--<div id="more_shows" style="padding-left: 35%; height: 50px;">-->
-<!--    <a href="#" onclick="">Показать еще</a>-->
-<!--</div>-->
-<!--<div class="clear"></div>-->
-<!---->
-<!--<div class="descText">-->
-<!--    <article">-->
-<!--    <div class="map-wrap" id="map-wrap"></div>-->
-<!--    </article>-->
-<!--</div>-->
-<!--<div class="descText">-->
-<!--    <article>-->
-<!--        --><?php //echo $this->text ?>
-<!--    </article>-->
-<!--</div>-->

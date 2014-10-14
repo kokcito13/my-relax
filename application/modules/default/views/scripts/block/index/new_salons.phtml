@@ -1,0 +1,25 @@
+<div class="new-salon">
+    <div class="header">
+        Новые салоны
+    </div>
+    <div id="new-salon-carousel" class="content">
+        <? foreach ($this->salons->data as $k => $salon): ?>
+            <? $content = $salon->getContent()->getFields();?>
+            <? $city = $salon->getCity();?>
+            <? $cityContent = $city->getContent()->getFields();?>
+            <div class="salon-item-box">
+                <div class="salon-item">
+                    <a href="<?=Kernel_City::getUrlForLink($city)?><?=$salon->getRoute()->getUrl();?>"><?=$content['name']->getFieldText();?></a>
+                    <a href="<?=Kernel_City::getUrlForLink($city)?><?=$salon->getRoute()->getUrl();?>">
+                        <img src="<?=$salon->getPhoto1()->getPath('80', true);?>" alt="Салон эротического массажа <?=$content['name']->getFieldText();?>" height="80">
+                    </a>
+                    <span class="city"><?=$cityContent['contentName']->getFieldText();?></span>
+                    <a class="comment-value" href="<?=Kernel_City::getUrlForLink($city)?><?=$this->url(array('url_key'=>$salon->getUrlKey()), 'default-salon-review');?>"><?=count($salon->getComments())?> отзывов</a>
+                </div>
+            </div>
+        <? endforeach; ?>
+    </div>
+    <a id="new-salon-prev" href="#"></a>
+    <a id="new-salon-next" href="#"></a>
+    <a class="all-item-carousel" href="/">Все салоны &rarr;</a>
+</div>

@@ -206,7 +206,7 @@
         });
 
 
-        $(".salons > ul > li a").on("click", function(e){
+        $(".salons > ul > li > a").on("click", function(e){
             e.preventDefault();
             if ( $(this).hasClass("clicked") ) {
                 $(this).next().slideUp();

@@ -1,0 +1,12 @@
+<div class="home-post-box">
+    <h2>Виды и элементы эротического массажа</h2>
+    <? foreach ($this->massages->data as $mass): ?>
+        <? $massContent = $mass->getContent()->getFields(); ?>
+        <article class="home-post">
+            <h3><a href="<?=$mass->getRoute()->getUrl();?>"><?=$massContent['name']->getFieldText();?></a></h3>
+            <p><?=$massContent['desc']->getFieldText();?></p>
+            <a class="read-more" href="<?=$mass->getRoute()->getUrl();?>">Подробнее &rarr;</a>
+        </article>
+
+    <? endforeach;?>
+</div>

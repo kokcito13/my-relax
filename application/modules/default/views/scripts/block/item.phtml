@@ -1,47 +1,31 @@
 <? $content = $this->salon->getContent()->getFields();?>
 <? $area = $this->salon->getArea();?>
 <? $areaContent = $area->getContent()->getFields();?>
-<div class="salonItem"
-     data-lat="<?=$this->salon->getLat();?>"
-     data-lng="<?=$this->salon->getLng();?>"
-     data-url="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>"
-     data-img="<?=$this->salon->getPhoto1()->getPath('120', true);?>"
-    >
-    <div class="newSalonLabel"></div>
-    <div class="salonInfo">
-        <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>" class="salonLogo">
-            <img alt="Салон эротического массажа <?=$content['name']->getFieldText();?>"
-                 class="lazy" data-original="<?=$this->salon->getPhoto1()->getPath('120', true);?>"
-                 width="80" height="80">
-            <h3><?=$content['name']->getFieldText();?></h3>
+<article class="salon-item-article">
+    <div class="salon-title">
+        <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>" class="title-link"><?=$content['name']->getFieldText();?></a>
+        <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>">
+            <img src="<?=$this->salon->getPhoto1()->getPath('80', true);?>" alt="Салон эротического массажа <?=$content['name']->getFieldText();?>" width="80">
         </a>
-        <div class="clear"></div>
-        <? if (Kernel_City::findCityFromUrl()): ?>
-            <a class="location" href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-map');?>"><?=$areaContent['contentName']->getFieldText();?></a>
-        <? else : ?>
-            <? $cityContent = $this->salon->getCity()->getContent()->getFields(); ?>
-            <a class="location" href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?>"><?=$cityContent['contentName']->getFieldText();?></a>
-        <? endif; ?>
-        <div class="commentValueBox">
-            <span class="commentIcon"></span> – <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>"><?=count($this->salon->getComments())?> <?=Kernel_Block::getText('отзывов', $this->blocks);?></a>
+        <a class="comment-value" href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>"><?=count($this->salon->getComments())?> отзывов</a>
+    </div>
+    <div class="salon-model-box">
+        <div class="salon-site">
+            <a target="_blank" href="<?=isset($content['url'])?$content['url']->getFieldText():''?>"><?=isset($content['url'])?$content['url']->getFieldText():''?></a>
         </div>
-        <em><?=Kernel_Block::getText('положительных', $this->blocks);?> – <?=count($this->salon->getGoodComments())?></em>
-        <br>
-        <em><?=Kernel_Block::getText('отрицательных', $this->blocks);?> – <?=count($this->salon->getBadComments())?></em>
-        <div class="clear"></div>
+        <div class="salon-model">
+            <p>Девушки салона:</p>
+            <? foreach ($this->salon->getGirls() as $key=>$girl): ?>
+                <? if( $key >= 3 ) break; ?>
+                <? $contentGirl = $girl->getContent()->getFields();?>
+                <? $photo = $girl->getGallery()->getFirstPhoto(); ?>
+                <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>#girl_<?=$girl->getId()?>" class="salonModelItem">
+                    <img alt="Массажистка <?=$contentGirl['contentName']->getFieldText();?>"
+                         class="lazy" data-original="<?=$photo->getPath('120:120');?>" width="120"/>
+                </a>
+            <? endforeach; ?>
+            <div class="clear"></div>
+            <a class="desc-link" href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>">Общие описание и отзывы (<?=count($this->salon->getComments())?>)</a>
+        </div>
     </div>
-    <div class="salonModelBox">
-        <? foreach ($this->salon->getGirls() as $key=>$girl): ?>
-            <? if( $key >= 3 ) break; ?>
-            <? $contentGirl = $girl->getContent()->getFields();?>
-            <? $photo = $girl->getGallery()->getFirstPhoto(); ?>
-            <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>#girl_<?=$girl->getId()?>" class="salonModelItem">
-                <img alt="Массажистка <?=$contentGirl['contentName']->getFieldText();?>"
-                     class="lazy" data-original="<?=$photo->getPath('240:240');?>" width="240" height="240"
-                    >
-                <h4><?=$contentGirl['contentName']->getFieldText();?></h4>
-            </a>
-        <? endforeach; ?>
-    </div>
-    <div class="clear"></div>
-</div>
+</article>
