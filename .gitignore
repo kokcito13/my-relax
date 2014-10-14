@@ -2,7 +2,7 @@ INSTALL.txt
 LICENSE.txt
 README.txt
 demos/
-library/*
+#library/*
 imagecache/*
 tmp/adminka_images/*
 .idea/*
