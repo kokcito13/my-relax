@@ -17,7 +17,7 @@ class Kernel_City
             header('Location: http://' . substr($_SERVER['SERVER_NAME'], 4));
         }
 
-        if (!empty($serverName)) {
+        if (!empty($serverName) && $serverName != SITE_NAME) {
             $city = Application_Model_Kernel_City::getByUrl($serverName);
         }
 

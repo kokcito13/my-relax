@@ -10,7 +10,7 @@
 <!--            <a href="--><?//=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?><!--">– --><?//=$this->countAllComments; ?><!-- --><?//=Kernel_Block::getText('отзывов', $this->blocks);?><!--</a>-->
 <!--            <em>--><?//=Kernel_Block::getText('положительных', $this->blocks);?><!-- – --><?//=$this->countGoodComments; ?><!--</em><br>-->
 <!--            <em>--><?//=Kernel_Block::getText('нейтральных', $this->blocks);?><!-- – --><?//=$this->countNormalComments; ?><!--</em><br>-->
-<!--            <em>--><?//=Kernel_Block::getText('отрицательных', $this->blocks);?><!-- – --><?//=$this->countBadComments; ?><!--</em>-->
+            <em><?=Kernel_Block::getText('отрицательных', $this->blocks);?> – <?=$this->countBadComments; ?></em>
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->

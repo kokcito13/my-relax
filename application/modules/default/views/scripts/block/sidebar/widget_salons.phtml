@@ -1,0 +1,22 @@
+<div class="sidebar-widget salons">
+    <h3>Салоны</h3>
+    <ul>
+        <? foreach ($this->cities as $city): ?>
+            <?php if ($city->getStatus() == 0) continue; ?>
+            <?php $content = $city->getContent()->getFields();?>
+            <li><a href="#"><?=$content['contentName']->getFieldText();?></a>
+                <ul class="sub-menu">
+                    <? $areas = $city->getAreas(); ?>
+                    <? foreach ($areas as $area): ?>
+                        <? if ($area->getStatus() == 0) continue; ?>
+                        <?php $contentArea = $area->getContent()->getFields();?>
+                        <li><a href="http://<?=$city->getUrl();?>/<?=$area->getUrl();?>"><?=$contentArea['contentName']->getFieldText();?></a></li>
+                    <? endforeach; ?>
+                </ul>
+            </li>
+        <? endforeach; ?>
+    </ul>
+    <div class="all-salons-link-box">
+        <a class="all-salons" href="#">Весь список салонов &rarr;</a>
+    </div>
+</div>

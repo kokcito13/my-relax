@@ -29,27 +29,15 @@
     'area' => isset($this->area)?$this->area:false,
     'word' => isset($this->word)?$this->word:'',
 )) ?>
-<nav class="mainmenu">
-    <div class="wrapper">
-        <ul>
-            <li><a href="#">САЛОНЫ</a>
-                <a class="quantity" href="#">12</a>
-            </li>
-            <li><a href="">ДЕВУШКИ</a>
-                <a class="quantity" href="#">152</a>
-            </li>
-            <li><a href="">Акции и скидки </a>
-                <a class="quantity" href="#">7</a>
-            </li>
-            <li><a href="">ВСЕ ОТЗЫВЫ </a></li>
-            <li><a href="">Виды массажа</a></li>
-            <li><a href="">Статьи</a></li>
-        </ul>
-        <a class="add-salon" href="#">Добавить салон</a>
-        <a class="login" href="#">Войти</a>
-
-    </div>
-</nav>
+<?php echo $this->partial('blocks/menu.phtml', array (
+    'menu' => $this->menu,
+    'blocks' => $this->blocks,
+    'siteSetings' => $this->siteSetings,
+    'cityContent' => $this->currentCityContent,
+    'currentLang' => $this->currentLang,
+    'area' => isset($this->area)?$this->area:false,
+    'word' => isset($this->word)?$this->word:'',
+)) ?>
     <?php echo $this->layout()->content ?>
 
     <?php echo $this->partial('blocks/footer.phtml', array (
