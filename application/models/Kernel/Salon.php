@@ -25,6 +25,8 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
     private $call_price = 0;
     private $url_key;
 
+    private $recommend = 0;
+
     const ITEM_ON_PAGE = 8;
 
     private $comments = array();
@@ -37,7 +39,9 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         $idPhoto1, $idPhoto2, $idPhoto3, $idPhoto4,
         $idPage, $idRoute, $idContentPack,
         $pageEditDate, $pageStatus, $position,
-        $phone, $lat, $lng, $city_id, $area_id, $call_price, $url_key = ''
+        $phone, $lat, $lng,
+        $city_id, $area_id, $call_price,
+        $url_key = '', $recommend = 0
     )
     {
         parent::__construct($idPage, $idRoute, $idContentPack, $pageEditDate, $pageStatus, self::TYPE_SALON, $position);
@@ -55,6 +59,7 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         $this->area_id = $area_id;
         $this->call_price = $call_price;
         $this->url_key = $url_key;
+        $this->recommend = $recommend;
     }
 
     public function getId()
@@ -134,7 +139,8 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
                 'city_id' => $this->city_id,
                 'area_id' => $this->area_id,
                 'call_price' => $this->call_price,
-                'url_key' => $this->url_key
+                'url_key' => $this->url_key,
+                'recommend' => $this->recommend
             );
             if ($insert) {
                 $db->insert('salons', $data);
@@ -189,7 +195,7 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
                         $data->idPage, $data->idRoute, $data->idContentPack,
                         $data->pageEditDate, $data->pageStatus, $data->position,
                         $data->phone, $data->lat, $data->lng, $data->city_id,
-                        $data->area_id, $data->call_price, $data->url_key
+                        $data->area_id, $data->call_price, $data->url_key, $data->recommend
                         );
     }
 
@@ -629,5 +635,17 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         $session = new Zend_Session_Namespace("phone");
 
         return isset($session->phones)&&isset($session->phones[$this->getId()]);
+    }
+
+    public function getRecommend()
+    {
+        return $this->recommend;
+    }
+
+    public function setRecommend($recommend)
+    {
+        $this->recommend = $recommend;
+
+        return $this;
     }
 }

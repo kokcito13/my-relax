@@ -52,4 +52,26 @@ class IndexController extends Zend_Controller_Action
 
         $this->view->salons = Application_Model_Kernel_Salon::getList('salons.call_price', "DESC", true, true, false, 1, 1, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
     }
+
+    public function salonsAction()
+    {
+        $where = false;
+        $this->view->idPage      = ((int)$this->_getParam('idPage')==0)?:$this->_getParam('idPage');
+        $this->view->page = Application_Model_Kernel_Page_ContentPage::getByPageId($this->view->idPage);
+
+        $this->view->contentPage = $this->view->page->getContent()->getFields();
+
+        $title       = trim($this->view->contentPage['title']->getFieldText());
+        $keywords    = trim($this->view->contentPage['keywords']->getFieldText());
+        $description = trim($this->view->contentPage['description']->getFieldText());
+
+        $this->view->text        = $this->view->contentPage['content']->getFieldText();
+        $this->view->title       = $title;
+        $this->view->keywords    = $keywords;
+        $this->view->description = $description;
+
+        $this->view->headText = isset($this->view->contentPage['head'])?$this->view->contentPage['head']->getFieldText():'';
+
+        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.call_price', "DESC", true, true, false, 1, 1, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
+    }
 }

@@ -1,0 +1,33 @@
+<div class="relax-recommends">
+    <div class="header">
+        My-Relax рекомендует:
+        <small>лучшие салоны эротического массажа</small>
+    </div>
+    <div id="salon-carousel" class="content">
+        <? $j = 1;?>
+        <? foreach ($this->salons->data as $k => $salon): ?>
+            <? $content = $salon->getContent()->getFields();?>
+            <? $city = $salon->getCity();?>
+            <? $cityContent = $city->getContent()->getFields();?>
+            <? if ($j == 1): ?>
+                <div class="salon-item-box">
+            <? endif; ?>
+            <div class="salon-item">
+                <a href="<?=Kernel_City::getUrlForLink($city)?><?=$salon->getRoute()->getUrl();?>"><?=$content['name']->getFieldText();?></a>
+                <a href="<?=Kernel_City::getUrlForLink($city)?><?=$salon->getRoute()->getUrl();?>">
+                    <img src="<?=$salon->getPhoto1()->getPath('80', true);?>" alt="Салон эротического массажа <?=$content['name']->getFieldText();?>" height="80">
+                </a>
+                <span class="city"><?=$cityContent['contentName']->getFieldText();?></span>
+                <a class="comment-value" href="<?=Kernel_City::getUrlForLink($city)?><?=$this->url(array('url_key'=>$salon->getUrlKey()), 'default-salon-review');?>"><?=count($salon->getComments())?> отзывов</a>
+            </div>
+            <? if ($j == 2 || count($this->salons->data) == ($k+1)): ?>
+                </div>
+                <? $j = 0; ?>
+            <? endif; ?>
+            <? $j ++;?>
+        <? endforeach; ?>
+    </div>
+    <a id="salon-prev" href="#"></a>
+    <a id="salon-next" href="#"></a>
+    <a class="all-item-carousel" href="/">Все салоны &rarr;</a>
+</div>
