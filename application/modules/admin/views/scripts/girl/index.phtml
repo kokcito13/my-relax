@@ -23,7 +23,7 @@
         <?php $class = ''; ?>
         <tbody>
         <? $i = 0; ?>
-        <? foreach ($this->girls as $item): ?>
+        <? foreach ($this->girls->data as $item): ?>
             <? $content = $item->getContent()->getFields(); ?>
             <? $i++; ?>
             <? ($class === 'grey') ? $class = '' : $class = 'grey'; ?>

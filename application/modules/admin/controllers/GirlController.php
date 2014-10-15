@@ -27,7 +27,7 @@ class Admin_GirlController extends Zend_Controller_Action
 
         $this->view->breadcrumbs->add('Девушки', '');
         $this->view->headTitle()->append('Девушки');
-        $this->view->girls = Application_Model_Kernel_Girl::getList($this->view->salon_id);
+        $this->view->girls = Application_Model_Kernel_Girl::getList('','girls.id DESC', true, true, false, false, false, false, false, true, 'girls.salon_id = '.$this->view->salon_id);
     }
 
     public function addAction()
@@ -39,8 +39,12 @@ class Admin_GirlController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             $data = (object)$this->getRequest()->getPost();
             try {
-                $content = array ();
-                $i       = 0;
+                $url = new Application_Model_Kernel_Routing_Url("/");
+                $defaultParams = new Application_Model_Kernel_Routing_DefaultParams();
+                $route = new Application_Model_Kernel_Routing(null, Application_Model_Kernel_Routing::TYPE_ROUTE, '~public', 'default', 'girl', 'show', $url, $defaultParams, Application_Model_Kernel_Routing::STATUS_ACTIVE);
+
+                $content = array();
+                $i = 0;
                 foreach ($this->view->langs as $lang) {
                     $content[$i] = new Application_Model_Kernel_Content_Language(null, $lang->getId(), null);
                     foreach ($data->content[$lang->getId()] as $k => $v)
@@ -48,11 +52,23 @@ class Admin_GirlController extends Zend_Controller_Action
                     $i++;
                 }
                 $contentManager = new Application_Model_Kernel_Content_Manager(null, $content);
+                $this->view->salon = new Application_Model_Kernel_Girl(null,
+                    null, null, null,
+                    time(), Application_Model_Kernel_Page_ContentPage::STATUS_SHOW, 0,
+                    null, null, null);
 
-                $this->view->salon = new Application_Model_Kernel_Girl(null, null, $this->view->salon_id, null, $data->age);
                 $this->view->salon->setContentManager($contentManager);
-                $this->view->salon->validate();
+                $this->view->salon->setRoute($route);
+
+                $this->view->salon->setAge($data->age);
+                $this->view->salon->setSalonId($this->view->salon_id);
+
+
+                $this->view->salon->setPath($data);
+                $this->view->salon->validate($data);
+
                 $this->view->salon->save();
+                $this->view->salon->updatePath();
 
                 $this->_redirect($this->view->url(array ('salon_id' => $this->view->salon_id), 'admin-girl-index'));
             } catch (Application_Model_Kernel_Exception $e) {
