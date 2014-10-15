@@ -1,4 +1,5 @@
 <?php
+
 class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
 {
 
@@ -9,15 +10,17 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
     private $idGallery;
     private $_gallery = null;
 
+    private $salon = null;
+
     public function __construct($id, $idPage, $idRoute, $idContentPack,
                                 $pageEditDate, $pageStatus, $position, $salon_id, $idGallery, $age)
     {
         parent::__construct($idPage, $idRoute, $idContentPack, $pageEditDate, $pageStatus, self::TYPE_GIRL, $position);
-        $this->id             = $id;
+        $this->id = $id;
         $this->_idContentPack = $idContentPack;
-        $this->salon_id       = $salon_id;
-        $this->idGallery      = $idGallery;
-        $this->age            = $age;
+        $this->salon_id = $salon_id;
+        $this->idGallery = $idGallery;
+        $this->age = (int)$age;
     }
 
     public function getId()
@@ -96,19 +99,17 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
                 $select->where('fields.fieldText LIKE ?', $searchName);
             }
         }
-        $select->where('pages.pageType = ?', self::TYPE_SALON);
+        $select->where('pages.pageType = ?', self::TYPE_GIRL);
         if ($wher) {
             $select->where($wher);
         }
         if ($order && $orderType) {
             if ($order == 'BY' && $orderType == 'RAND') {
                 $select->order(new Zend_Db_Expr('RAND()'));
-            }
-            else {
+            } else {
                 $select->order($order . ' ' . $orderType);
             }
-        }
-        else {
+        } else {
             if (!$nextorder) {
                 $select->order('pages.idPage DESC');
             }
@@ -125,7 +126,8 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
 
         $cachemanager = Zend_Registry::get('cachemanager');
         $cache = $cachemanager->getCache('girls');
-        if (($return = $cache->load(md5($select->assemble())."_".(int)$onPage."_".(int)$page)) !== false) {
+
+        if (($return = $cache->load(md5($select->assemble()) . "_" . (int)$onPage . "_" . (int)$page)) !== false) {
             return $return;
         } else {
             $return = new stdClass();
@@ -164,22 +166,25 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
     public function save()
     {
         $db = Zend_Registry::get('db');
-        $db->beginTransaction();
         try {
             $db->beginTransaction();
             $insert = is_null($this->_idPage);
             $this->savePageData(); //сохраняем даные страницы
             $data = array(
-                'idPage'   => $this->getIdPage(),
+                'idPage' => $this->getIdPage(),
                 'salon_id' => $this->salon_id,
                 'idGallery' => $this->idGallery,
-                'age' => $this->age
+                'age' => (int)$this->age
             );
             if ($insert) {
+                $this->_gallery = new Application_Model_Kernel_Gallery(null, time(), time(), 0);
+                $this->_gallery->save();
+                $this->_idGallery = $this->_gallery->getId();
+                $data['idGallery'] = $this->_idGallery;
+
                 $db->insert('girls', $data);
                 $this->id = $db->lastInsertId();
-            }
-            else {
+            } else {
                 $db->update('girls', $data, 'id = ' . intval($this->id));
             }
             $db->commit();
@@ -209,8 +214,7 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
         $select->limit(1);
         if (($productData = $db->fetchRow($select)) !== false) {
             return self::getSelf($productData);
-        }
-        else {
+        } else {
             throw new Exception(self::ERROR_INVALID_ID);
         }
     }
@@ -226,7 +230,6 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
 
     public function show()
     {
-        $db = Zend_Registry::get('db');
         $this->_pageStatus = self::STATUS_SHOW;
         $this->savePageData();
         $this->clearCache();
@@ -234,7 +237,6 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
 
     public function hide()
     {
-        $db = Zend_Registry::get('db');
         $this->_pageStatus = self::STATUS_HIDE;
         $this->savePageData();
         $this->clearCache();
@@ -255,28 +257,47 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
         $select->limit(1);
         if (($productData = $db->fetchRow($select)) !== false) {
             return self::getSelf($productData);
-        }
-        else {
+        } else {
             throw new Exception(self::ERROR_INVALID_ID);
         }
 //		}
     }
 
+    public function getSalon()
+    {
+        if (is_null($this->salon)) {
+            $this->salon = Application_Model_Kernel_Salon::getById($this->salon_id);
+        }
+
+        return $this->salon;
+    }
+
     public function setPath($data)
     {
         $path = Application_Model_Kernel_TextRedactor::makeTranslit($data->content[1]["name"]);
-        $this->getRoute()->setUrl('/girls/'.$path.'.html');
+        $this->getRoute()->setUrl('/girls/' . $path . '-%id%.html');
     }
 
     public function updatePath()
     {
         $path = $this->getRoute()->getUrl();
-        $path = substr($path, 0, -5);
+        $path = str_replace('%id%', $this->id, $path);
 
-        $this->getRoute()->setUrl($path.'_'.(int)$this->id.'.html');
+        $this->getRoute()->setUrl($path);
         $this->getRoute()->save();
+    }
 
-        $this->setUrlKey(mb_substr($path, 1).'_'.(int)$this->id);
-        $this->save();
+    public function clearCache()
+    {
+        $cachemanager = Zend_Registry::get('cachemanager');
+        $cache = $cachemanager->getCache('girls');
+        foreach ($cache->getIds () as $k=>$v) {
+            $cache->remove($v);
+        }
+    }
+
+    public function path()
+    {
+        return Kernel_City::getUrlForLink($this->getSalon()->getCity()).$this->getRoute()->getUrl();
     }
 }

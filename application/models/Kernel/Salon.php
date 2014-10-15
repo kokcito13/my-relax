@@ -615,7 +615,7 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
     public function getGirls()
     {
         if (is_null($this->girls)) {
-            $this->girls = Application_Model_Kernel_Girl::getList($this->id);
+            $this->girls = Application_Model_Kernel_Girl::getList('','girls.id DESC', true, true, false, false, false, false, false, true, 'girls.salon_id = '.$this->id)->data;
         }
 
         return $this->girls;
@@ -647,5 +647,10 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         $this->recommend = $recommend;
 
         return $this;
+    }
+
+    public function path()
+    {
+        return Kernel_City::getUrlForLink($this->getCity()).$this->getRoute()->getUrl();
     }
 }

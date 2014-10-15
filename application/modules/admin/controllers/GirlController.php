@@ -27,7 +27,7 @@ class Admin_GirlController extends Zend_Controller_Action
 
         $this->view->breadcrumbs->add('Девушки', '');
         $this->view->headTitle()->append('Девушки');
-        $this->view->girls = Application_Model_Kernel_Girl::getList('','girls.id DESC', true, true, false, false, false, false, false, true, 'girls.salon_id = '.$this->view->salon_id);
+        $this->view->girls = Application_Model_Kernel_Girl::getList('','girls.id DESC', true, true, false, false, 1, 10, 10, true, 'girls.salon_id = '.$this->view->salon_id);
     }
 
     public function addAction()
@@ -51,6 +51,7 @@ class Admin_GirlController extends Zend_Controller_Action
                         $content[$i]->setFields($k, $v);
                     $i++;
                 }
+
                 $contentManager = new Application_Model_Kernel_Content_Manager(null, $content);
                 $this->view->salon = new Application_Model_Kernel_Girl(null,
                     null, null, null,

@@ -42,10 +42,14 @@
                     </a>
                 </td>
                 <td style="padding-left:10px;">
-                    <?=$content['contentName']->getFieldText();?>
+                    <?=$content['name']->getFieldText();?>
                 </td>
                 <td style="text-align: right;"></td>
-                <td style="text-align: left;">
+                <td style="text-align: right;">
+                    <a href="<?=$item->path()?>" target="_black" title="Просмотр"><img src="/static/admin/images/eye.png" alt="" width="16" height="16"></a>&nbsp;&nbsp;
+                    <a href="javascript:changeStatus(<?=$item->getIdPage()?>, 1);" class="<?=$item->getStatus();?>" title="<?=$StatusTitle;?>">
+                        <img class="page_status_<?=$item->getIdPage()?>" src="/static/admin/images/show_<?=$item->getStatus();?>.png" alt="" width="15" height="15">
+                    </a>
                 </td>
                 <td style="text-align: left;">
                     <a href="<?= $this->url(array ('id' => $item->getId(), 'salon_id'=>$this->salon_id), 'admin-girl-delete'); ?>" class="delete" title="Удалить" onclick="return confirmDelete();"><img src="/static/admin/images/icon_delete.gif" alt=""
@@ -56,3 +60,5 @@
         </tbody>
     <?php endif; ?>
 </table>
+
+<input id="statusUrl" type="hidden" value="<?=$this->url(array(),'admin-page-status')?>"/>

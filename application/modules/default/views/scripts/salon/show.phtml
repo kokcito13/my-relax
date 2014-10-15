@@ -37,6 +37,7 @@
                     <a href="<?=$this->contentPage['url']->getFieldText();?>" target="_blank"><?=$this->contentPage['url']->getFieldText();?></a>
                 </div>
             <? endif; ?>
+            <? if (count($this->girls) > 0): ?>
             <div class="relax-recommends">
                 <div class="header"><?=Kernel_Block::getText('Девушки салона', $this->blocks);?></div>
                 <div class="model-item-container">
@@ -45,9 +46,9 @@
                         <div class="model-item-box">
                             <div class="model-item">
                                 <div class="name">
-                                    <a href="#"><?=$content['contentName']->getFieldText();?></a>, <?=$girl->getAge();?>
+                                    <a href="<?=$girl->path()?>"><?=$content['contentName']->getFieldText();?></a>, <?=$girl->getAge();?>
                                 </div>
-                                <a href="#">
+                                <a href="<?=$girl->path()?>">
                                     <? $photo = $girl->getGallery()->getFirstPhoto(); ?>
                                     <img src="<?=$photo->getPath('150', true);?>" width="150px" alt="Массажистка <?=$content['contentName']->getFieldText();?>">
                                 </a>
@@ -57,6 +58,7 @@
                     <? endforeach; ?>
                 </div>
             </div>
+            <? endif; ?>
             <?=$this->ShowSalonSubscribeBox()?>
             <?=$this->ShowTopSalonCity()?>
             <?=$this->ShowTopGirlCity()?>
