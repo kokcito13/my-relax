@@ -35,7 +35,7 @@ class Application_Model_Kernel_Content_Language
 
     public function getFields()
     {
-        return $this->fields;
+        return new Application_Model_Kernel_ArrayCollection($this->fields);
     }
 
     public function getContentName()

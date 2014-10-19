@@ -46,12 +46,15 @@
                         <div class="model-item-box">
                             <div class="model-item">
                                 <div class="name">
-                                    <a href="<?=$girl->path()?>"><?=$content['contentName']->getFieldText();?></a>, <?=$girl->getAge();?>
+                                    <a href="<?=$girl->path()?>"><?=$content['name']->getFieldText();?></a>, <?=$girl->getAge();?>
                                 </div>
+                                <? $galery = $girl->getGallery(); ?>
+                                <? if (!is_null($galery)): ?>
                                 <a href="<?=$girl->path()?>">
-                                    <? $photo = $girl->getGallery()->getFirstPhoto(); ?>
-                                    <img src="<?=$photo->getPath('150', true);?>" width="150px" alt="Массажистка <?=$content['contentName']->getFieldText();?>">
+                                    <? $photo = $galery->getFirstPhoto(); ?>
+                                    <img src="<?=$photo->getPath('150', true);?>" width="150px" alt="Массажистка <?=$content['name']->getFieldText();?>">
                                 </a>
+                                <? endif; ?>
                                 <a class="comment-value">26 отзывов</a>
                             </div>
                         </div>
