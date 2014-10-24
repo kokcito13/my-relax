@@ -3,66 +3,27 @@
         Популярные девушки города Киев
     </div>
     <div id="new-model-carousel" class="content">
-        <div class="new-model-item-box">
-            <div class="new-model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
+        <? foreach ($this->salons->data as $salon): ?>
+            <? foreach ($salon->getGirls() as $girl): ?>
+                <? if (!$girl->isPopular()) continue; ?>
+                <? $girlContent = $girl->getContent()->getFields(); ?>
+                <div class="model-item-box">
+                    <div class="model-item">
+                        <div class="name">
+                            <a href="<?=$girl->path(); ?>"><?=$girlContent->getFText('name'); ?></a>, <?=$girl->getAge();?>
+                        </div>
+                        <? $girlGallery = $girl->getGallery(); ?>
+                        <? if (!is_null($girlGallery) && $girlGallery->getPhotoCount() > 0): ?>
+                            <a href="<?=$girl->path()?>">
+                                <? $photo = $girlGallery->getFirstPhoto(); ?>
+                                <img src="<?=$photo->getPath('150', true);?>" width="150px" alt="Массажистка <?=$girlContent->getFText('name');?>">
+                            </a>
+                        <? endif; ?>
+                        <a class="comment-value"><?=count($girl->getComments())?> отзывов</a>
+                    </div>
                 </div>
-                <a href="#"><img src="images/model1g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="new-model-item-box">
-            <div class="new-model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="new-model-item-box">
-            <div class="new-model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="new-model-item-box">
-            <div class="new-model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="images/model1g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="new-model-item-box">
-            <div class="new-model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="new-model-item-box">
-            <div class="new-model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
+            <? endforeach; ?>
+        <? endforeach; ?>
     </div>
     <a id="new-model-prev" href="#"></a>
     <a id="new-model-next" href="#"></a>

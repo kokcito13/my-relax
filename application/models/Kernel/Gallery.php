@@ -37,6 +37,9 @@ class Application_Model_Kernel_Gallery {
 		$select->order('photos.photoPosition DESC');
 		$select->limit(1);
 		$photo = $db->fetchRow($select);
+        if (!$photo) {
+            return false;
+        }
 		return new Application_Model_Kernel_Photo($photo->idPhoto, $photo->photoPath, $photo->photoAlt, $photo->photoPosition);
 	}
 	

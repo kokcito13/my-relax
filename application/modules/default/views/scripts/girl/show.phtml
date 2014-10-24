@@ -69,11 +69,13 @@
                     </div>
                 </div>
             </div>
-            <div class="more-info">
-                <span class="white-lable">Посмотреть других девушек салона</span></br>
-                <span class="red-lable">и узнать про удовольствия в салоне</span>
-                <a href="#"><?=$this->salonContent->getFText('url')?></a>
-            </div>
+            <? if ($this->salonContent->notEmptyEle('url')): ?>
+                <div class="more-info">
+                    <span class="white-lable">Посмотреть других девушек салона</span></br>
+                    <span class="red-lable">и узнать про удовольствия в салоне</span>
+                    <a href="#"><?=$this->salonContent->getFText('url')?></a>
+                </div>
+            <? endif; ?>
             <? if (count($photos) > 0): ?>
                 <div class="relax-recommends">
                     <div class="header">
@@ -93,31 +95,32 @@
             <? endif; ?>
             <? $girls = $this->salon->getGirls(); ?>
             <? if (!is_null($girls) && count($girls) > 1): ?>
-            <div class="relax-recommends other-models">
+                <div class="relax-recommends other-models">
                 <div class="header">
                     Другие девушки салона
                 </div>
                 <article class="salon-item-article">
                     <div class="salon-model-box">
                         <div class="salon-model">
-                            <div class="model-item-box">
-                                <div class="model-item">
-                                    <div class="name">
-                                        <a href="#">Виктория</a>, 22
+                            <? foreach ($girls as $girl): ?>
+                                <? if ($girl->getId() == $this->girl->getId()) continue; ?>
+                                <? $girlContent = $girl->getContent()->getFields(); ?>
+                                <div class="model-item-box">
+                                    <div class="model-item">
+                                        <div class="name">
+                                            <a href="<?=$girl->path(); ?>"><?=$girlContent->getFText('name'); ?></a>, <?=$girl->getAge();?>
+                                        </div>
+                                        <? $girlGallery = $girl->getGallery(); ?>
+                                        <? if (!is_null($girlGallery) && $girlGallery->getPhotoCount() > 0): ?>
+                                            <a href="<?=$girl->path()?>">
+                                                <? $photo = $girlGallery->getFirstPhoto(); ?>
+                                                <img src="<?=$photo->getPath('150', true);?>" width="150px" alt="Массажистка <?=$girlContent->getFText('name');?>">
+                                            </a>
+                                        <? endif; ?>
+                                        <a class="comment-value"><?=count($girl->getComments())?> отзывов</a>
                                     </div>
-                                    <a href="#"><img src="images/other-models.png"></a>
-                                    <a class="comment-value">26 отзывов</a>
                                 </div>
-                            </div>
-                            <div class="model-item-box">
-                                <div class="model-item">
-                                    <div class="name">
-                                        <a href="#">Виктория</a>, 22
-                                    </div>
-                                    <a href="#"><img src="images/other-models2.png"></a>
-                                    <a class="comment-value">26 отзывов</a>
-                                </div>
-                            </div>
+                            <? endforeach; ?>
                             <div class="clear"></div>
                         </div>
                     </div>
@@ -199,76 +202,7 @@
                 <a id="new-salon-next" href="#"></a>
                 <a class="all-item-carousel" href="#">Все салоны &rarr;</a>
             </div>
-            <div class="new-models">
-            <div class="header">
-                Популярные девушки города Киев
-            </div>
-            <div id="new-model-carousel" class="content">
-                <div class="new-model-item-box">
-                    <div class="new-model-item">
-                        <div class="name">
-                            <a href="#">Виктория</a>, 22
-                        </div>
-                        <a href="#"><img src="images/model1g.png"></a>
-                        <span class="city">Днепропетровск</span>
-                        <a class="comment-value">26 отзывов</a>
-                    </div>
-                </div>
-                <div class="new-model-item-box">
-                    <div class="new-model-item">
-                        <div class="name">
-                            <a href="#">Виктория</a>, 22
-                        </div>
-                        <a href="#"><img src="images/model2g.png"></a>
-                        <span class="city">Днепропетровск</span>
-                        <a class="comment-value">26 отзывов</a>
-                    </div>
-                </div>
-                <div class="new-model-item-box">
-                    <div class="new-model-item">
-                        <div class="name">
-                            <a href="#">Виктория</a>, 22
-                        </div>
-                        <a href="#"><img src="images/model2g.png"></a>
-                        <span class="city">Днепропетровск</span>
-                        <a class="comment-value">26 отзывов</a>
-                    </div>
-                </div>
-                <div class="new-model-item-box">
-                    <div class="new-model-item">
-                        <div class="name">
-                            <a href="#">Виктория</a>, 22
-                        </div>
-                        <a href="#"><img src="images/model1g.png"></a>
-                        <span class="city">Днепропетровск</span>
-                        <a class="comment-value">26 отзывов</a>
-                    </div>
-                </div>
-                <div class="new-model-item-box">
-                    <div class="new-model-item">
-                        <div class="name">
-                            <a href="#">Виктория</a>, 22
-                        </div>
-                        <a href="#"><img src="images/model2g.png"></a>
-                        <span class="city">Днепропетровск</span>
-                        <a class="comment-value">26 отзывов</a>
-                    </div>
-                </div>
-                <div class="new-model-item-box">
-                    <div class="new-model-item">
-                        <div class="name">
-                            <a href="#">Виктория</a>, 22
-                        </div>
-                        <a href="#"><img src="images/model2g.png"></a>
-                        <span class="city">Днепропетровск</span>
-                        <a class="comment-value">26 отзывов</a>
-                    </div>
-                </div>
-            </div>
-            <a id="new-model-prev" href="#"></a>
-            <a id="new-model-next" href="#"></a>
-            <a class="all-item-carousel" href="#">Все девушки &rarr;</a>
-        </div>
+            <?=$this->ShowTopGirlCity(); ?>
         </div>
         <aside class="sidebar-right">
             <div class="sidebar-right-widget">

@@ -12,6 +12,17 @@ class GirlController extends Zend_Controller_Action
         }
     }
 
+    public function indexAction()
+    {
+        $where = '';
+        $city = Kernel_City::findCityFromUrl();
+        if ($city) {
+            $where = 'salons.city_id = '.$city->getId();
+        }
+
+        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.call_price', "DESC", true, true, false, 1, 1, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
+    }
+
     public function showAction()
     {
         $this->view->idPage = (int)$this->_getParam('idPage');

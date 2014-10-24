@@ -62,8 +62,8 @@ class Admin_GirlController extends Zend_Controller_Action
                 $this->view->salon->setRoute($route);
 
                 $this->view->salon->setAge($data->age);
+                $this->view->salon->setPopular(isset($data->popular)?1:0);
                 $this->view->salon->setSalonId($this->view->salon_id);
-
 
                 $this->view->salon->setPath($data);
                 $this->view->salon->validate($data);
@@ -95,6 +95,7 @@ class Admin_GirlController extends Zend_Controller_Action
                 Application_Model_Kernel_Content_Fields::setFieldsForModel($data->content, $getContent, $this->view->salon);
 
                 $this->view->salon->setAge($data->age);
+                $this->view->salon->setPopular(isset($data->popular)?1:0);
                 $this->view->salon->validate();
                 $this->view->salon->save();
 
@@ -106,6 +107,7 @@ class Admin_GirlController extends Zend_Controller_Action
             }
         } else {
             $_POST['age']     = $this->view->salon->getAge();
+            $_POST['popular']     = $this->view->salon->getPopular();
             $_POST['content'] = $this->view->salon->getContentManager()->getContents();
             foreach ($this->view->langs as $lang) {
                 if (isset($_POST['content'][$lang->getId()]))

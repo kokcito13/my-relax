@@ -72,6 +72,12 @@
             </td>
         </tr>
         <tr class="grey">
+            <td width="193" class="first">Популярная:</td>
+            <td>
+                <input name="popular" type="checkbox" class="field" value="1" <? if (isset($_POST['popular'])&&$_POST['popular']==1): ?>checked="checked" <? endif; ?>/>
+            </td>
+        </tr>
+        <tr class="grey" style="display: none;">
             <td width="193" class="first">URL:</td>
             <td>
                 <input name="realName" type="text" class="field" style="background-color: #F2F2F2; width:10px;" disabled="disabled" value="/" />

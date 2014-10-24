@@ -12,8 +12,13 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
 
     private $salon = null;
 
+    private $popular;
+
+    const POPULAR_NO = 0;
+    const POPULAR_YES = 0;
+
     public function __construct($id, $idPage, $idRoute, $idContentPack,
-                                $pageEditDate, $pageStatus, $position, $salon_id, $idGallery, $age)
+                                $pageEditDate, $pageStatus, $position, $salon_id, $idGallery, $age, $popular = 0)
     {
         parent::__construct($idPage, $idRoute, $idContentPack, $pageEditDate, $pageStatus, self::TYPE_GIRL, $position);
         $this->id = $id;
@@ -21,6 +26,7 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
         $this->salon_id = $salon_id;
         $this->idGallery = $idGallery;
         $this->age = (int)$age;
+        $this->popular = (int)$popular;
     }
 
     public function getId()
@@ -62,6 +68,23 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
         return $this;
     }
 
+    public function getPopular()
+    {
+        return $this->popular;
+    }
+
+    public function isPopular()
+    {
+        return $this->getPopular()==self::POPULAR_YES;
+    }
+
+    public function setPopular($popular)
+    {
+        $this->popular = $popular;
+
+        return $this;
+    }
+
     public function validate()
     {
         $e = new Application_Model_Kernel_Exception();
@@ -78,7 +101,8 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
         return new self($data->id,
             $data->idPage, $data->idRoute, $data->idContentPack,
             $data->pageEditDate, $data->pageStatus, $data->position,
-            $data->salon_id, $data->idGallery, $data->age
+            $data->salon_id, $data->idGallery, $data->age,
+            $data->popular
         );
     }
 
@@ -87,6 +111,7 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
         $db = Zend_Registry::get('db');
         $select = $db->select()->from('girls');
         $select->join('pages', 'pages.idPage = girls.idPage');
+        $select->join('salons', 'salons.id = girls.salon_id');
 
         if ($route) {
             $select->join('routing', 'pages.idRoute = routing.idRoute');
@@ -174,7 +199,8 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
                 'idPage' => $this->getIdPage(),
                 'salon_id' => $this->salon_id,
                 'idGallery' => $this->idGallery,
-                'age' => (int)$this->age
+                'age' => (int)$this->age,
+                'popular' => (int)$this->popular
             );
             if ($insert) {
                 $this->_gallery = new Application_Model_Kernel_Gallery(null, time(), time(), 0);
@@ -299,5 +325,10 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
     public function path()
     {
         return Kernel_City::getUrlForLink($this->getSalon()->getCity()).$this->getRoute()->getUrl();
+    }
+
+    public function getComments()
+    {
+        return array();
     }
 }
