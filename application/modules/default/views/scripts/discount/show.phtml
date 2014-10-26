@@ -1,0 +1,55 @@
+<? $this->headScript()->captureStart() ?>
+<? $this->headScript()->captureEnd() ?>
+<sections class="post-content">
+    <div class="wrapper">
+        <aside class="left-sidebar">
+            <?=$this->ShowWidgetSalons();?>
+            <?=$this->ShowWidgetBanner();?>
+            <?=$this->ShowWidgetComments();?>
+            <?=$this->ShowWidgetAdvertisings();?>
+            <?=$this->ShowWidgetArticles();?>
+        </aside>
+        <div class="content-right">
+            <article class="discount-box">
+                <h2><?=$this->contentPage->getFtext('name');?> <?=$this->contentPage->getFtext('name_part');?></h2>
+                <img class="alingleft" src="<?=$this->discount->getPhoto1()->getPath('350', true)?>" width="350px"/>
+                <?=$this->contentPage['content']->getFieldText();?>
+            </article>
+            <div class="discound-day">
+                <h3>Дата проведения акции: <span><?=$this->contentPage->getFtext('date');?></span></h3>
+                <? $salon = $this->discount->getSalon(); ?>
+                <? $contentSalon = $salon->getContent()->getFields(); ?>
+                <div class="content-box">
+                    <div class="first-cell">
+                        <h4>Салон:</h4>
+                        <a href="<?=$salon->path();?>"><?=$contentSalon->getFText('name')?></a>
+                        <a href="<?=$salon->path();?>">
+                            <img src="<?=$salon->getPhoto1()->getPath('80', true);?>" width="80px" alt="Салон эротического массажа <?=$contentSalon->getFText('name')?>">
+                        </a>
+                    </div>
+                    <div class="second-cell">
+                        <h4>Девушки салона:</h4>
+                        <? foreach ($salon->getGirls() as $k=>$girl): ?>
+                            <? $content = $girl->getContent()->getFields();?>
+                            <? $galery = $girl->getGallery(); ?>
+                            <? if (!is_null($galery)): ?>
+                                <? $photo = $galery->getFirstPhoto(); ?>
+                                <? if ($photo): ?>
+                                    <a href="<?=$girl->path()?>">
+                                        <img src="<?=$photo->getPath('150', true);?>" width="150px" alt="Массажистка <?=$content->getFText('name');?>">
+                                    </a>
+                                <? endif; ?>
+                            <? endif; ?>
+                        <? endforeach; ?>
+                    </div>
+                </div>
+                <? if (isset($this->contentPage['url']) && !empty($this->contentPage['url'])): ?>
+                    <div class="salon-site">
+                        Подробности на сайте: <a href="<?=$contentSalon->getFText('url')?>"><?=$contentSalon->getFText('url')?></a>
+                    </div>
+                <? endif; ?>
+            </div>
+            <?=$this->ShowSalonSubscribeBox()?>
+        </div>
+    </div>
+</sections>

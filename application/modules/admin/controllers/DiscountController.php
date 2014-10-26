@@ -136,7 +136,6 @@ class Admin_DiscountController extends Zend_Controller_Action
         $this->view->headTitle()->append('Редактировать');
     }
 
-
     public function deleteAction()
     {
         $this->_helper->viewRenderer->setNoRender();

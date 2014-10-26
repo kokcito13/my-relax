@@ -324,7 +324,7 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
 
     public function path()
     {
-        return Kernel_City::getUrlForLink($this->getSalon()->getCity()).$this->getRoute()->getUrl();
+        return $this->getSalon()->path().$this->getRoute()->getUrl();
     }
 
     public function getComments()

@@ -303,21 +303,17 @@ class Application_Model_Kernel_Discount extends Application_Model_Kernel_Page
         $this->idPhoto1 = $idPhoto1;
     }
 
-    public function setPath($data)
+    public function getSalon()
     {
-        $path = Application_Model_Kernel_TextRedactor::makeTranslit($data->content[1]["name"]);
-        $this->getRoute()->setUrl('/' . $path . '.html');
+        if (is_null($this->salon)) {
+            $this->salon = Application_Model_Kernel_Salon::getById($this->salon_id);
+        }
+
+        return $this->salon;
     }
 
-    public function updatePath()
+    public function path()
     {
-        $path = $this->getRoute()->getUrl();
-        $path = substr($path, 0, -5);
-
-        $this->getRoute()->setUrl($path . '_' . (int)$this->id . '.html');
-        $this->getRoute()->save();
-
-        $this->setUrlKey(mb_substr($path, 1) . '_' . (int)$this->id);
-        $this->save();
+        return $this->getSalon()->path().$this->getRoute()->getUrl();
     }
 }
