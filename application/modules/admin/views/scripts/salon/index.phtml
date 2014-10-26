@@ -55,6 +55,7 @@ if (count($this->salons->data)): ?>
                 <td style="text-align: left; padding-left: 10px;">
 <!--                  <input type="checkbox" onclick="chengeStatusProject(--><?//=$item->getId()?><!--)" --><?// if ($item->getProductStatus() ==2): ?><!--checked="checked" --><?// endif; ?><!--/>-->
                     <a href="<?=$this->url(array('salon_id'=>$item->getId()), 'admin-girl-index');?>" class="edit" style="float: left; display:block; margin-right: 10px;" title="Девушки">Девушки</a>
+                    <a href="<?=$this->url(array('salon_id'=>$item->getId()), 'admin-discount-index');?>" class="edit" style="float: left; display:block; margin-right: 10px;" title="Девушки">Акции</a>
                     <a href="<?=$this->url(array('salon_id'=>$item->getId()), 'admin-massage-index');?>" class="edit" style="float: left; display:block; margin-right: 10px;" title="Массажи">Массажи</a>
                     <a href="<?=$this->url(array('salon_id'=>$item->getId()), 'admin-comment-index');?>" class="edit" style="float: left; display:block; margin-right: 10px;" title="Комментарии">Комментарии</a>
                     <? if(count($item->getNewComments()) > 0): ?><sup><b>+ <?=count($item->getNewComments());?></b></sup><? endif; ?>
