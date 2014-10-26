@@ -1,0 +1,47 @@
+<? $this->headScript()->captureStart() ?>
+<? $this->headScript()->captureEnd() ?>
+<sections class="discount-content">
+    <div class="wrapper">
+        <aside class="left-sidebar">
+            <?=$this->ShowWidgetSalons();?>
+            <?=$this->ShowWidgetSubscribe();?>
+            <?=$this->ShowWidgetBanner();?>
+            <?=$this->ShowWidgetComments();?>
+            <?=$this->ShowWidgetNewSalons();?>
+        </aside>
+        <div class="content-right">
+            <article>
+                <h2>Весь эротический массаж в Украине</h2>
+                <p>Сайт <a href="#">My-Relax</a> самый полный каталог салонов эротического массажа в Киеве и Украине. Для каждого салона Вы найдете: краткое описание, географическое месторасположение на карте города, фотографии девушек, отзывы и рейтинги от посетителей салонов, виды эротического массажа и его стоимость.</p>
+            </article>
+            <?=$this->ShowSalonSubscribeBox()?>
+            <? foreach ($this->discounts->data as $discount): ?>
+                <? $content = $discount->getContent()->getFields(); ?>
+                <? $salon = $discount->getSalon();?>
+                <? $salonContent = $salon->getContent()->getFields(); ?>
+                <div class="discount-article">
+                    <div class="first-cell">
+                        <h2>
+                            <a href="<?=$discount->path();?>"><?=$content->getFText('name');?></a>
+                        </h2>
+                        <span class="title-desc"><?=$content->getFText('name_part');?></span>
+                        <div class="discount-meta">
+                            <span>Даты проведения акции:</span> <?=$content->getFText('date');?> </br>
+                            <span>Салон:</span> <a href="<?=$salon->path();?>"><?=$salonContent->getFText('name')?></a>
+                        </div>
+                        <div class="discount-text">
+                            <?=$content->getFText('desc');?>
+                        </div>
+
+                        <a class="about-discount" href="<?=$discount->path();?>">Подробнее про акцию &rarr;</a>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="second-cell">
+                        <img  src="<?=$discount->getPhoto1()->getPath('150', true)?>" width="150px">
+                    </div>
+                </div>
+            <? endforeach;?>
+            <?=$this->paginationControl($this->discounts->paginator, 'Sliding', 'block/paginator_mass.phtml'); ?>
+        </div>
+    </div>
+</sections>

@@ -29,20 +29,27 @@ class DiscountController extends Zend_Controller_Action
         $this->view->description = $description;
     }
 
-    public function listAction()
+    public function indexAction()
     {
+        $city = Kernel_City::findCityFromUrl();
+        $where = '';
+        if ($city) {
+            $this->view->contentPage = $city->getContent()->getFields();
+            $where = 'salons.city_id = '.$city->getId();
+        }
+
         $this->view->page = (int)$this->_getParam('page');
-        $this->view->discounts = Application_Model_Kernel_Mass::getList(false, false, true, true, false, false, $this->view->page, 15, false, true, false);
+        $this->view->discounts = Application_Model_Kernel_Discount::getList(false, false, true, true, false, false, $this->view->page, 15, false, true, $where);
 
         if ($this->view->page == 1) {
-            $this->view->headText = "<link rel='next' href='/massages/page".($this->view->page+1).".html' />";
+            $this->view->headText = "<link rel='next' href='/skidki/page".($this->view->page+1).".html' />";
         } else {
             if ($this->view->page == 2)
-                $this->view->headText = "<link rel='prev' href='/massages/' />";
+                $this->view->headText = "<link rel='prev' href='/skidki/' />";
             else
-                $this->view->headText = "<link rel='prev' href='/massages/page".($this->view->page-1).".html' />";
-            $this->view->headText .=  "<link rel='next' href='/massages/page".($this->view->page+1).".html' />
-                                    <link rel='canonical' href='/massages/' />";
+                $this->view->headText = "<link rel='prev' href='/skidki/page".($this->view->page-1).".html' />";
+            $this->view->headText .=  "<link rel='next' href='/skidki/page".($this->view->page+1).".html' />
+                                    <link rel='canonical' href='/skidki/' />";
         }
 
         $this->view->title = 'Все виды эротического массажа от каталога салонов viprelax.';

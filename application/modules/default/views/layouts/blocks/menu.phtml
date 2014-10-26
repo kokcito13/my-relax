@@ -8,7 +8,8 @@
                 <a href="<?=$this->url(array(), 'default-list-girls');?>">ДЕВУШКИ</a>
                 <a class="quantity" href="#">152</a>
             </li>
-            <li><a href="">Акции и скидки </a>
+            <li>
+                <a href="<?=$this->url(array(),'default-list-discount')?>">Акции и скидки </a>
                 <a class="quantity" href="#">7</a>
             </li>
             <li><a href="">ВСЕ ОТЗЫВЫ </a></li>
@@ -19,64 +20,3 @@
 <!--        <a class="login" href="#">Войти</a>-->
     </div>
 </nav>
-<!--<header>-->
-<!--    <div class="wrapper">-->
-<!--        <a class="logo" href="--><?//=Kernel_City::getUrlForLink(false)?><!--"><img src="/static/default/images/logo.png" width="321" height="77"></a>-->
-<!--        <div class="top-info" style="">-->
-<!--            --><? /*<a href="<?=$this->siteSetings->getUrl1();?>">
-                <img src="<?=$this->siteSetings->getPhoto1()->getPath('591:60')?>" alt="">
-            </a>*/ ?>
-<!--            <div style="width: auto; margin-top: -10px; margin-left: 60px;">-->
-<!--                <script type="text/javascript" src="//yandex.st/share/share.js"-->
-<!--                        charset="utf-8"></script>-->
-<!--                <div class="yashare-auto-init" data-yashareL10n="ru"-->
-<!--                     data-yashareQuickServices="yaru,vkontakte,facebook,twitter,gplus" data-yashareTheme="counter"></div>-->
-<!--            </div>-->
-<!--            <br/>-->
-<!--            <div>-->
-<!--                <span><a href="--><?//=$this->url(array(),'public-page-37')?><!--">О проекте</a></span>-->
-<!--                <span><a href="--><?//=$this->url(array(),'public-page-38')?><!--">Для салонов</a></span>-->
-<!--                <span><a href="--><?//=$this->url(array(),'default-type-massage')?><!--">Виды масажа</a></span>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="clear"></div>-->
-<!---->
-<!--        <div class="clear"></div>-->
-<!--        --><?// if (isset($this->menu) && $this->menu == 'main'): ?>
-<!--            <div class="searchBox">-->
-<!--            --><?//
-//                $lang = '';
-//                if ($this->currentLang->getId() != 1) {
-//                    $lang = '-'.$this->currentLang->getCustomName();
-//                }
-//            ?>
-<!--            <form action="--><?//=$this->url(array('url_key'=>'','word'=>''),'default-list-area'.$lang)?><!--" onsubmit="return goToPage(this);">-->
-<!--                <div id="selectOne" class="selectBox">-->
-<!--                    --><?// if ($this->cityContent != false) :?>
-<!--                        <a href="#">– --><?//=$this->cityContent['contentName']->getFieldText();?><!-- –</a>-->
-<!--                    --><?// else: ?>
-<!--                        <a href="#">– --><?//=Kernel_Block::getText('Все города', $this->blocks);?><!-- –</a>-->
-<!--                    --><?// endif; ?>
-<!--                    <div class="select-option-box">-->
-<!--                        --><?//=$this->ShowListCities()?>
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div id="selectTwo" class="selectBox">-->
-<!--                    --><?// if ($this->area != false) :?>
-<!--                        --><?// $content = $this->area->getContent()->getFields();?>
-<!--                        <a href="#">– --><?//=$content['contentName']->getFieldText();?><!-- –</a>-->
-<!--                    --><?// else: ?>
-<!--                        <a href="#" id="empty_area">– --><?//=Kernel_Block::getText('Сначала выберите город', $this->blocks);?><!-- –</a>-->
-<!--                    --><?// endif; ?>
-<!--                    <div class="select-option-box">-->
-<!--                        --><?//=$this->ShowListArea($this->area)?>
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <input type="text" name="word" size="" value="--><?// if (!isset($this->word) || empty($this->word)):?><!----><?//=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?><!----><?// else: ?><!----><?//=$this->word?><!----><?// endif ?><!--" onblur="if (this.value == '') {this.value = '--><?//=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?><!--';}" onfocus="if (this.value == '--><?//=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?><!--') {this.value = '';}" style="display: none;"/>-->
-<!--                <div class="clear"></div>-->
-<!--                <div class="clear"></div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--        --><?// endif; ?>
-<!--    </div>-->
-<!--</header>-->

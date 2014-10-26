@@ -180,6 +180,7 @@ class Application_Model_Kernel_Discount extends Application_Model_Kernel_Page
         $db = Zend_Registry::get('db');
         $select = $db->select()->from(self::TABLE_NAME);
         $select->join('pages', 'pages.idPage = ' . self::TABLE_NAME . '.idPage');
+        $select->join('salons', 'salons.id = '.self::TABLE_NAME.'.salon_id');
 
         if ($route) {
             $select->join('routing', 'pages.idRoute = routing.idRoute');
@@ -314,6 +315,6 @@ class Application_Model_Kernel_Discount extends Application_Model_Kernel_Page
 
     public function path()
     {
-        return $this->getSalon()->path().$this->getRoute()->getUrl();
+        return Kernel_City::getUrlForLink($this->getSalon()->getCity()).$this->getRoute()->getUrl();
     }
 }

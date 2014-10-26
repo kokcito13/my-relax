@@ -2,9 +2,13 @@
     <div class="wrapper">
         <nav class="footer-nav">
             <ul>
-                <li><a href="#">Салон</a></li>
-                <li><a href="#">Девушки</a></li>
-                <li><a href="#">Виды массажа</a></li>
+                <li><a href="/">Салон</a></li>
+                <li>
+                    <a href="<?=$this->url(array(), 'default-list-girls');?>">Девушки</a>
+                </li>
+                <li>
+                    <a href="<?=$this->url(array(),'default-type-massage')?>">Виды массажа</a>
+                </li>
                 <li><a href="#">Все отзывы</a></li>
                 <li><a href="#">Статьи</a></li>
                 <li><a href="#">Услуги для салонов</a></li>
