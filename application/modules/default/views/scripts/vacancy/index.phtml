@@ -1,0 +1,36 @@
+<? $this->headScript()->captureStart() ?>
+<? $this->headScript()->captureEnd() ?>
+<sections class="discount-content">
+    <div class="wrapper">
+        <aside class="left-sidebar">
+            <?=$this->ShowWidgetSalons();?>
+            <?=$this->ShowWidgetSubscribe();?>
+            <?=$this->ShowWidgetBanner();?>
+            <?=$this->ShowWidgetComments();?>
+            <?=$this->ShowWidgetNewSalons();?>
+        </aside>
+        <div class="content-right">
+            <article>
+                <h2>Весь эротический массаж в Украине</h2>
+                <p>Сайт <a href="#">My-Relax</a> самый полный каталог салонов эротического массажа в Киеве и Украине. Для каждого салона Вы найдете: краткое описание, географическое месторасположение на карте города, фотографии девушек, отзывы и рейтинги от посетителей салонов, виды эротического массажа и его стоимость.</p>
+            </article>
+            <?=$this->ShowSalonSubscribeBox()?>
+            <? foreach ($this->items->data as $vacancy): ?>
+                <? $content = $vacancy->getContent()->getFields(); ?>
+                <div class="discount-article">
+                    <div class="first-cell">
+                        <h2>
+                            <a href="<?=$vacancy->path();?>"><?=$content->getFText('name');?></a>
+                        </h2>
+                        <div class="discount-text">
+                            <?=$content->getFText('desc');?>
+                        </div>
+                        <a class="about-discount" href="<?=$vacancy->path();?>">Подробнее &rarr;</a>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            <? endforeach;?>
+            <?=$this->paginationControl($this->items->paginator, 'Sliding', 'block/paginator_mass.phtml'); ?>
+        </div>
+    </div>
+</sections>

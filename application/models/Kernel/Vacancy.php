@@ -96,7 +96,7 @@ class Application_Model_Kernel_Vacancy extends Application_Model_Kernel_Page
 
     private static function getSelf(stdClass &$data)
     {
-        return new self($data->id, $data->idPhoto, $data->salon_id,
+        return new self($data->id, $data->salon_id, $data->idPhoto,
             $data->idPage, $data->idRoute, $data->idContentPack,
             $data->pageEditDate, $data->pageStatus, $data->position
         );
