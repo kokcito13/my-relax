@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_Kernel_Discount extends Application_Model_Kernel_Page
+class Application_Model_Kernel_Vacancy extends Application_Model_Kernel_Page
 {
 
     private $id;
@@ -12,7 +12,7 @@ class Application_Model_Kernel_Discount extends Application_Model_Kernel_Page
 
 
     const ITEM_ON_PAGE = 10;
-    const TABLE_NAME = 'discount';
+    const TABLE_NAME = 'vacancy';
 
     public function __construct(
         $id, $salon_id, $idPhoto1,
@@ -21,7 +21,7 @@ class Application_Model_Kernel_Discount extends Application_Model_Kernel_Page
     )
     {
         parent::__construct($idPage, $idRoute, $idContentPack,
-            $pageEditDate, $pageStatus, self::TYPE_DISCOUNT,
+            $pageEditDate, $pageStatus, self::TYPE_VACANCY,
             $position);
         $this->id = $id;
 
@@ -193,7 +193,7 @@ class Application_Model_Kernel_Discount extends Application_Model_Kernel_Page
                 $select->where('fields.fieldText LIKE ?', $searchName);
             }
         }
-        $select->where('pages.pageType = ?', self::TYPE_DISCOUNT);
+        $select->where('pages.pageType = ?', self::TYPE_VACANCY);
         if ($wher) {
             $select->where($wher);
         }
