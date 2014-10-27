@@ -16,6 +16,8 @@ class Zend_View_Helper_ShowWidgetArticles
             $view->blocks[$key] = $value->getContent()->getFields();
         }
 
+        $view->articles = Application_Model_Kernel_Article::getList(' article.id ', ' DESC ', true, true, false, false, false, false, 3, true, false);
+
         return $view->render('block/sidebar/widget_articles.phtml');
     }
 }

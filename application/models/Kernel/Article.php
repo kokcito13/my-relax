@@ -314,4 +314,9 @@ class Application_Model_Kernel_Article extends Application_Model_Kernel_Page
         $this->setUrlKey(mb_substr($path, 1) . '_' . (int)$this->id);
         $this->save();
     }
+
+    public function path()
+    {
+        return $this->getRoute()->getUrl();
+    }
 }
