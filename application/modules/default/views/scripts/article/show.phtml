@@ -1,0 +1,21 @@
+<? $this->headScript()->captureStart() ?>
+<? $this->headScript()->captureEnd() ?>
+<sections class="post-content">
+    <div class="wrapper">
+        <aside class="left-sidebar">
+            <?=$this->ShowWidgetSalons();?>
+            <?=$this->ShowWidgetBanner();?>
+            <?=$this->ShowWidgetComments();?>
+            <?=$this->ShowWidgetAdvertisings();?>
+            <?=$this->ShowWidgetArticles();?>
+        </aside>
+        <div class="content-right">
+            <article class="discount-box">
+                <h2><?=$this->contentPage['name']->getFieldText();?></h2>
+                <img class="alingleft" src="<?=$this->mass->getPhoto1()->getPath('350', true)?>" width="350px" />
+                <?=$this->contentPage['content']->getFieldText();?>
+            </article>
+            <?=$this->ShowSalonSubscribeBox()?>
+        </div>
+    </div>
+</sections>

@@ -33,6 +33,7 @@ abstract class Application_Model_Kernel_Page implements Application_Model_Kernel
 	const TYPE_MASS = 4;
 	const TYPE_DISCOUNT = 5;
 	const TYPE_VACANCY = 6;
+	const TYPE_ARTICLE = 7;
 
 	const ERROR_INVALID_ID = 'INVALID ID GIVEN';
 	const ERROR_INVALID_PAGE_ID = 'INVALID PAGE ID GIVEN';

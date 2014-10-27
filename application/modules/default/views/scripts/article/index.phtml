@@ -1,0 +1,31 @@
+<? $this->headScript()->captureStart() ?>
+<? $this->headScript()->captureEnd() ?>
+<sections class="discount-content">
+    <div class="wrapper">
+        <aside class="left-sidebar">
+            <?=$this->ShowWidgetSalons();?>
+            <?=$this->ShowWidgetSubscribe();?>
+            <?=$this->ShowWidgetBanner();?>
+            <?=$this->ShowWidgetComments();?>
+            <?=$this->ShowWidgetNewSalons();?>
+        </aside>
+        <div class="content-right">
+            <div class="salon-filter">
+                <label>
+                    <span>Статьи и новости мира салонов эротического массажа </span>
+                </label>
+            </div>
+            <?=$this->ShowSalonSubscribeBox()?>
+            <? foreach ($this->articles->data as $article): ?>
+                <? $articleContent = $article->getContent()->getFields(); ?>
+                <div class="post-box">
+                    <h2><a href="<?=$article->getRoute()->getUrl();?>"><?=$articleContent['name']->getFieldText();?></a></h2>
+                    <div class="post-text"><?=$articleContent['desc']->getFieldText();?></div>
+                    <a class="readmore-post" href="<?=$article->getRoute()->getUrl();?>">Подробнее &rarr;</a>
+                    <div class="clear"></div>
+                </div>
+            <? endforeach;?>
+            <?=$this->paginationControl($this->articles->paginator, 'Sliding', 'block/paginator_mass.phtml'); ?>
+        </div>
+    </div>
+</sections>
