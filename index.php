@@ -1,5 +1,5 @@
 <?php 
-
+//phpinfo();exit;
 define('SITE_NAME','my-rel.lc');
 
 // Указание пути к директории приложения
