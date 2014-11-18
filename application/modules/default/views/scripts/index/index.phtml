@@ -1,6 +1,6 @@
 <?php $this->headScript()->captureStart() ?>
-<? $this->headScript()->captureEnd() ?>
-<? $city = Kernel_City::findCityFromUrl();?>
+<?php $this->headScript()->captureEnd() ?>
+<?php $city = Kernel_City::findCityFromUrl();?>
 <sections class="home-content">
 <? if (!$city): ?>
     <div class="wrapper">
