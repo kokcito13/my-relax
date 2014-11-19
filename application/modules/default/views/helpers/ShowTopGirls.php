@@ -16,7 +16,7 @@ class Zend_View_Helper_ShowTopGirls
             $view->blocks[$key] = $value->getContent()->getFields();
         }
 
-        $view->salons = Application_Model_Kernel_Salon::getList('','salons.id BY DESC ', true, true, false, 1, false, false, 20, true, 'salons.recommend = 1');
+        $view->girls = Application_Model_Kernel_Girl::getList('girls.id', "DESC", true, true, false, 1, false, false, false, true, "girls.popular = 1");
 
         return $view->render('block/index/top_girls.phtml');
     }

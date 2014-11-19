@@ -3,117 +3,36 @@
         ТОП девушки
         <small>салонов эротического массажа</small>
     </div>
+    <? $i = 1; ?>
+    <? $j = 0; ?>
     <div id="model-carousel" class="content">
-        <div class="model-item-box">
+        <? foreach ($this->girls->data as $girl): ?>
+            <? $girlContent = $girl->getContent()->getFields(); ?>
+            <? if ($i == 1): ?>
+                <div class="model-item-box">
+            <? endif; ?>
             <div class="model-item">
                 <div class="name">
-                    <a href="#">Виктория</a>, 22
+                    <a href="<?=$girl->path(); ?>"><?=$girlContent->getFText('name'); ?></a>, <?=$girl->getAge();?>
                 </div>
-                <a href="#"><img src="/static/default/images/model1g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
+                <? $girlGallery = $girl->getGallery(); ?>
+                <? if (!is_null($girlGallery) && $girlGallery->getPhotoCount() > 0): ?>
+                    <a href="<?=$girl->path()?>">
+                        <? $photo = $girlGallery->getFirstPhoto(); ?>
+                        <img src="<?=$photo->getPath('150', true);?>" width="150" alt="Массажистка <?=$girlContent->getFText('name');?>">
+                    </a>
+                <? endif; ?>
+                <a class="comment-value"><?=count($girl->getComments())?> отзывов</a>
             </div>
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
+            <? if ($i == 2 || $j==count($this->girls->data)): ?>
                 </div>
-                <a href="#"><img src="/static/default/images/model1g.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="model-item-box">
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="model-item-box">
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="model-item-box">
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model1g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model1g.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="model-item-box">
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
-        <div class="model-item-box">
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Днепропетровск</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-            <div class="model-item">
-                <div class="name">
-                    <a href="#">Виктория</a>, 22
-                </div>
-                <a href="#"><img src="/static/default/images/model2g.png"></a>
-                <span class="city">Киев</span>
-                <a class="comment-value">26 отзывов</a>
-            </div>
-        </div>
+                <? $i = 0; ?>
+            <?endif; ?>
+            <? $i++; ?>
+            <? $j++; ?>
+        <? endforeach; ?>
     </div>
     <a id="model-prev" href="#"></a>
     <a id="model-next" href="#"></a>
-    <a class="all-item-carousel" href="#">Все девушки &rarr;</a>
+    <a class="all-item-carousel" href="<?=$this->url(array(), 'default-list-girls');?>">Все девушки &rarr;</a>
 </div>

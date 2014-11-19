@@ -16,7 +16,7 @@ class Zend_View_Helper_ShowNewGirls
             $view->blocks[$key] = $value->getContent()->getFields();
         }
 
-        $view->salons = Application_Model_Kernel_Salon::getList('','salons.id BY DESC ', true, true, false, 1, false, false, 8, true);
+        $view->girls = Application_Model_Kernel_Girl::getList('girls.id', "DESC", true, true, false, 1, false, false, 6, true, false);
 
         return $view->render('block/index/new_girls.phtml');
     }

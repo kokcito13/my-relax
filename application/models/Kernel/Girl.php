@@ -111,7 +111,7 @@ class Application_Model_Kernel_Girl extends Application_Model_Kernel_Page
         $db = Zend_Registry::get('db');
         $select = $db->select()->from('girls');
         $select->join('pages', 'pages.idPage = girls.idPage');
-        $select->join('salons', 'salons.id = girls.salon_id');
+        $select->join('salons', 'salons.id = girls.salon_id', array());
 
         if ($route) {
             $select->join('routing', 'pages.idRoute = routing.idRoute');
