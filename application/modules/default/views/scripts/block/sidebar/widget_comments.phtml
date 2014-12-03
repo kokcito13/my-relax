@@ -1,30 +1,22 @@
 <div class="sidebar-widget comments-widget">
     <h3>Отзывы</h3>
     <ul>
+        <? foreach ($this->comments as $comment): ?>
+            <? $salon = $comment->getOwner(); ?>
+            <? $content = $salon->getContent()->getFields();?>
+            <? $city = $salon->getCity();?>
         <li>
-            <a href="#"><img src="images/ava.png"></a>
-            <a class="author" href="#">Mon - Amour</a>
-            <time>19 мая 2013 в 01:50</time>
-            <a class="comment" href="#">— Я покупала сертификат для своего мужчины. Большое спасибо, девушкам Даше и Асе.</a>
+            <a href="<?=Kernel_City::getUrlForLink($city)?><?=$salon->getRoute()->getUrl();?>">
+                <img src="<?=$salon->getPhoto1()->getPath('68:68');?>" alt="Салон эротического массажа <?=$content['name']->getFieldText();?>" height="68">
+            </a>
+            <a class="author" href="<?=Kernel_City::getUrlForLink($city)?><?=$salon->getRoute()->getUrl();?>"><?=$content['name']->getFieldText();?></a>
+            <time><?=Application_Model_Kernel_Date_Manager::formatDate($comment->getCommentDate(), Application_Model_Kernel_Date_Manager::TYPE_USER_VIEW)?></time>
+            <a class="comment" href="#">— <?=$comment->getCommentText()?></a>
             <div class="clear"></div>
         </li>
-        <li>
-            <a href="#"><img src="images/ava.png"></a>
-            <a class="author" href="#">Mon - Amour</a>
-            <time>19 мая 2013 в 01:50</time>
-            <a class="comment" href="#">— Я покупала сертификат для своего мужчины. Большое спасибо, девушкам Даше и Асе.</a>
-            <div class="clear"></div>
-        </li>
-        <li>
-            <a href="#"><img src="images/ava.png"></a>
-            <a class="author" href="#">Mon - Amour</a>
-            <time>19 мая 2013 в 01:50</time>
-            <a class="comment" href="#">— Я покупала сертификат для своего мужчины. Большое спасибо, девушкам Даше и Асе.</a>
-            <div class="clear"></div>
-        </li>
+        <? endforeach; ?>
     </ul>
     <div class="all-link-right">
-        <a href="#" class="all-comments">Все отзывы &rarr;</a>
+        <a href="<?=$this->url(array(),'default-page-reviews')?>" class="all-comments">Все отзывы &rarr;</a>
     </div>
-
 </div>

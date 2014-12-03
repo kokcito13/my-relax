@@ -100,11 +100,12 @@ class Application_Model_Kernel_Comment
                         $data->commentStatus, $data->commentAdminText, $data->commentAdminDate);
     }
 
-    public static function getList($salon_id, $status = false, $limit = false, $where = false)
+    public static function getList($salon_id = false, $status = false, $limit = false, $where = false)
     {
         $db = Zend_Registry::get('db');
         $select = $db->select()->from('comments');
-        $select->where('comments.idOwner = ?', $salon_id);
+        if ($salon_id)
+            $select->where('comments.idOwner = ?', $salon_id);
         if ($status) {
             $select->where('comments.commentStatus = ?', $status);
         }

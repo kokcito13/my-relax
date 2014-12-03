@@ -16,6 +16,9 @@ class Zend_View_Helper_ShowTopSalonCity
             $view->blocks[$key] = $value->getContent()->getFields();
         }
 
+        $where = 'salons.city_id = '.$view->city->getId();
+        $view->salons = Application_Model_Kernel_Salon::getList('','salons.id BY DESC ', true, true, false, 1, false, false, 20, true, $where.' AND salons.recommend = 1');
+
         return $view->render('block/top_salon_city.phtml');
     }
 }

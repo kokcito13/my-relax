@@ -1,3 +1,4 @@
+<? if (count($this->salons->data)>0): ?>
 <div class="new-models">
     <div class="header">
         Популярные девушки города Киев
@@ -29,3 +30,4 @@
     <a id="new-model-next" href="#"></a>
     <a class="all-item-carousel" href="<?=$this->url(array(), 'default-list-girls');?>">Все девушки &rarr;</a>
 </div>
+<? endif ?>

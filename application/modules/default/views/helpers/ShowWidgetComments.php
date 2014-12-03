@@ -16,6 +16,8 @@ class Zend_View_Helper_ShowWidgetComments
             $view->blocks[$key] = $value->getContent()->getFields();
         }
 
+        $view->comments = Application_Model_Kernel_Comment::getList(false, 1, 3);
+
         return $view->render('block/sidebar/widget_comments.phtml');
     }
 }

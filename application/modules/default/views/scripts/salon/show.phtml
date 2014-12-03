@@ -43,37 +43,29 @@
         </div>
         <aside class="sidebar-right">
         <div class="sidebar-right-widget">
-            <h3>Отзывы о салоне <span>(36)</span></h3>
+            <h3>Отзывы о салоне <span>(<?=count($this->salon->getComments())?>)</span></h3>
             <a class="leave-comment" href="#">Оставить отзыв</a>
             <ul>
-                <li>
-                    <span class="author">Миша</span>
-                    <time>19 мая 2013 в 01:50</time>
-                    <p class="author-comment">— Был сегодня в Вашем салоне. Мне очень понравилась массажистка Влада. Заеду
-                        еще. Ты мастер своего дела.</p>
-                </li>
-                <li>
-                    <span class="author">Миша</span>
-                    <time>19 мая 2013 в 01:50</time>
-                    <p class="author-comment">— Настя ты просто ангел!!! У тебя прекрасное тело а грудь мм....
-                        Ты профессионал! Рекомендую всем!!!!</p>
-                </li>
-                <li>
-                    <span class="author">Миша</span>
-                    <time>19 мая 2013 в 01:50</time>
-                    <p class="author-comment">— Дорогие мужчины!Спасибо за прекрасные слова в наш адрес.Мы всегда рады Вас
-                        видеть.Хотим ответить на ваши отзывы:-Лиза вернулась.А на счет затасканых..тупых..и
-                        антисанитарии-могу ответить-это ложь.Достаточно зайти на наш сайт и посмотреть на фото где шикарные
-                        девченки в аппартаментах с евроремонтом.Да и встречаем мы всех с улыбкой-так заведено.И уходит от
-                        нас ни с чем -один из пятидесяти.А то и отправляем сами если пришел "невминяшка"...А у нашего гостя
-                        видимо денег не хватило и ему отказали, вот и расстроился бедолага и решил грязью облить.Но это его
-                        мнение и мы его уважаем.А Вам советуем самим убедиться.Приходите,всегда Вам рады.</p>
-                </li>
+                <? $i = 1; ?>
+                <? $j = 1; ?>
+                <? foreach ($this->salon->getComments() as $comment): ?>
+                    <li <? if ($j > 1): ?>style="display: none;"<? endif;?> class="comment_part_<?=$j?>">
+                        <span class="author"><?=$comment->getCommentNick()?></span>
+                        <time><?=Application_Model_Kernel_Date_Manager::formatDate($comment->getCommentDate(), Application_Model_Kernel_Date_Manager::TYPE_USER_VIEW)?></time>
+                        <p class="author-comment">— <?=$comment->getCommentText()?></p>
+                    </li>
+                    <? if ($i == 3) {
+                        $i = 0;
+                        $j++;
+                    }
+                    ?>
+                    <? $i++; ?>
+                <? endforeach; ?>
             </ul>
-            <div class="prev-next-comments-box">
-                <a class="prev-comments" href="#">&larr; Предыдущие</a>
-                <a class="next-comments" href="#">Следующие &rarr;</a>
-            </div>
+<!--            <div class="prev-next-comments-box">-->
+<!--                <a class="prev-comments" href="#">&larr; Предыдущие</a>-->
+<!--                <a class="next-comments" href="#">Следующие &rarr;</a>-->
+<!--            </div>-->
         </div>
     </aside>
     </div>
